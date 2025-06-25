@@ -1,0 +1,646 @@
+/* ============================================
+   HACKERS (1995) - Cyberpunk Typography Rebellion Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Inspired by MTV-Style Cyber Aesthetic & Rave Culture
+   Enhanced with Professional Typography System
+   ============================================ */
+
+/* Adobe Fonts Integration for Professional Quality */
+@import url('https://use.typekit.net/afz6rqj.css');
+
+/* Google Fonts for Alternative Typography */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* Optimized Font Loading for Performance */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal italic;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+
+/* @settings
+
+name: Hackers (1995) Cyberpunk Rebellion Theme
+id: hackers-1995
+settings:
+  -
+    id: hackers-neon-color
+    title: Primary Neon Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#FF00FF'
+    default-dark: '#00FFFF'
+  -
+    id: hackers-intensity
+    title: Cyberpunk Intensity
+    description: How intense should the cyberpunk effects be?
+    type: variable-number-slider
+    default: 0.7
+    min: 0.3
+    max: 1.0
+    step: 0.1
+  -
+    id: hackers-rave-mode
+    title: Rave Culture Mode
+    description: Maximum rave aesthetic with pulsing effects
+    type: class-toggle
+    default: false
+*/
+
+:root {
+  /* Cyberpunk Neon Color Palette - Electric Rebellion */
+  --neon-cyan: #00FFFF;              /* Electric cyan */
+  --neon-magenta: #FF00FF;           /* Hot magenta */
+  --neon-green: #39FF14;             /* Acid green */
+  --neon-yellow: #FFFF00;            /* Electric yellow */
+  --neon-orange: #FF6600;            /* Cyber orange */
+  --neon-purple: #9933FF;            /* Deep purple */
+  --neon-pink: #FF1493;              /* Hot pink */
+  --neon-blue: #0099FF;              /* Electric blue */
+  
+  /* Dark Cyber Background Colors */
+  --cyber-black: #000000;            /* Pure black matrix */
+  --cyber-void-1: #0A0A0F;          /* Deep void */
+  --cyber-void-2: #131318;          /* Dark void */
+  --cyber-void-3: #1C1C26;          /* Medium void */
+  --cyber-void-4: #252530;          /* Light void */
+  --cyber-gray-1: #2E2E3A;          /* Dark cyber gray */
+  --cyber-gray-2: #383844;          /* Medium cyber gray */
+  --cyber-gray-3: #42424E;          /* Light cyber gray */
+  
+  /* Bright Cyber Colors for Light Mode */
+  --cyber-white: #FFFFFF;            /* Pure white */
+  --cyber-light-1: #F0F0FF;         /* Light cyber tint */
+  --cyber-light-2: #E0E0FF;         /* Medium light */
+  --cyber-light-3: #D0D0FF;         /* Darker light */
+  
+  /* Grid System - Cyber Architecture */
+  --cyber-unit: 8px;
+  --cyber-2x: calc(var(--cyber-unit) * 2);
+  --cyber-3x: calc(var(--cyber-unit) * 3);
+  --cyber-4x: calc(var(--cyber-unit) * 4);
+  --cyber-6x: calc(var(--cyber-unit) * 6);
+  --cyber-8x: calc(var(--cyber-unit) * 8);
+  
+  /* Cyberpunk Typography Stack - Futuristic Rebellion */
+  --font-cyber-display: 'Orbitron', 'Source Sans Pro', 'Inter', 'SF Pro', system-ui, sans-serif;
+  --font-cyber-body: 'Rajdhani', 'Source Sans Pro', 'Roboto', 'Arial', sans-serif;
+  --font-cyber-mono: 'Source Code Pro', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-cyber-graffiti: 'Impact', 'Arial Black', sans-serif;
+  
+  /* Font Weights - Cyber Intensity */
+  --weight-thin: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+  
+  /* Typography Features - Cyber Enhancement */
+  --font-features-cyber: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+  --font-features-mono: 'kern' 0, 'liga' 0, 'tnum' 1, 'lnum' 1;
+  --font-features-display: 'kern' 1, 'liga' 1, 'calt' 1, 'swsh' 1;
+  
+  /* Font Size Scale - Exponential Cyber Growth */
+  --font-scale: 1.414;  /* Square root of 2 - Mathematical progression */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 48px;
+  --font-size-4xl: 64px;
+  
+  /* Cyber Effects Variables */
+  --glow-intensity: var(--hackers-intensity, 0.7);
+  --pulse-speed: 2s;
+  --matrix-speed: 20s;
+  --glitch-intensity: 0.1;
+}
+
+.theme-light {
+  /* Light Mode - Corporate Mainframe */
+  --background-primary: var(--cyber-white);
+  --background-primary-alt: var(--cyber-light-1);
+  --background-secondary: var(--cyber-light-2);
+  --background-modifier-border: var(--cyber-light-3);
+  
+  --text-normal: var(--cyber-black);
+  --text-muted: var(--cyber-gray-1);
+  --text-faint: var(--cyber-gray-2);
+  
+  --interactive-accent: var(--hackers-neon-color, var(--neon-magenta));
+  --interactive-accent-hover: var(--neon-cyan);
+  
+  --code-background: var(--cyber-black);
+  --code-text: var(--neon-green);
+  --code-border: var(--neon-magenta);
+}
+
+.theme-dark {
+  /* Dark Mode - Cyber Underground */
+  --background-primary: var(--cyber-black);
+  --background-primary-alt: var(--cyber-void-1);
+  --background-secondary: var(--cyber-void-2);
+  --background-modifier-border: var(--cyber-void-4);
+  
+  --text-normal: var(--neon-cyan);
+  --text-muted: var(--cyber-gray-2);
+  --text-faint: var(--cyber-gray-1);
+  
+  --interactive-accent: var(--hackers-neon-color, var(--neon-cyan));
+  --interactive-accent-hover: var(--neon-magenta);
+  
+  --code-background: var(--cyber-void-1);
+  --code-text: var(--neon-green);
+  --code-border: var(--neon-cyan);
+}
+
+/* Rave Culture Mode - Maximum Cyberpunk */
+.hackers-rave-mode {
+  --glow-intensity: 1.0;
+  --pulse-speed: 1s;
+  --glitch-intensity: 0.3;
+}
+
+.hackers-rave-mode * {
+  animation: cyber-pulse var(--pulse-speed) ease-in-out infinite alternate;
+}
+
+/* ============================================
+   CYBERPUNK VISUAL EFFECTS
+   ============================================ */
+
+/* Neon glow animation */
+@keyframes neon-glow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px var(--interactive-accent);
+  }
+  50% { 
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor,
+      0 0 12px var(--interactive-accent);
+  }
+}
+
+/* Cyber pulse effect */
+@keyframes cyber-pulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1.0; }
+}
+
+/* Matrix rain background */
+@keyframes matrix-rain {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Glitch text effect */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* ============================================
+   MARKDOWN CONTENT - CYBERPUNK REBELLION
+   ============================================ */
+
+/* Reading and Writing Areas - Cyber Interface */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-cyber-body);
+  font-feature-settings: var(--font-features-cyber);
+  font-variant-numeric: lining-nums;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--cyber-4x);
+  max-width: calc(var(--cyber-unit) * 120);
+  margin: 0 auto;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+
+/* Matrix rain background effect */
+.hackers-rave-mode .markdown-preview-view::before {
+  content: '1010100110101001101010011010100110101001101010011010100110101001';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  font-family: var(--font-cyber-mono);
+  font-size: 12px;
+  color: var(--neon-green);
+  opacity: 0.1;
+  z-index: -1;
+  animation: matrix-rain var(--matrix-speed) linear infinite;
+  pointer-events: none;
+  word-break: break-all;
+  line-height: 1.2;
+}
+
+/* Headers - Cyberpunk Hierarchy */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-cyber-display);
+  font-feature-settings: var(--font-features-display);
+  line-height: 1.2;
+  margin-top: var(--cyber-6x);
+  margin-bottom: var(--cyber-3x);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+/* H1 - System Breach Headers */
+.markdown-preview-view h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--weight-black);
+  color: var(--interactive-accent);
+  text-align: center;
+  margin: var(--cyber-8x) 0 var(--cyber-6x) 0;
+  padding: var(--cyber-4x);
+  border: 3px solid var(--interactive-accent);
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(255, 0, 255, 0.1) 25%, 
+    transparent 50%, 
+    rgba(0, 255, 255, 0.1) 75%, 
+    transparent 100%);
+  animation: neon-glow 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.markdown-preview-view h1::before {
+  content: '>>> ACCESS GRANTED <<<';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  color: var(--neon-green);
+  background: var(--cyber-black);
+  padding: 4px 8px;
+  font-family: var(--font-cyber-mono);
+}
+
+.markdown-preview-view h1::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  animation: scan-line 4s linear infinite;
+}
+
+@keyframes scan-line {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* H2 - Program Headers */
+.markdown-preview-view h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--neon-magenta);
+  border-left: 5px solid var(--neon-magenta);
+  padding-left: var(--cyber-3x);
+  margin-top: var(--cyber-8x);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.markdown-preview-view h2::before {
+  content: '▶ ';
+  color: var(--neon-cyan);
+  animation: cyber-pulse 1.5s ease-in-out infinite;
+}
+
+/* H3-H6 - Subsystem Headers */
+.markdown-preview-view h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--neon-cyan);
+  margin-top: var(--cyber-4x);
+  text-shadow: 0 0 5px currentColor;
+}
+
+.markdown-preview-view h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--neon-yellow);
+  margin-top: var(--cyber-4x);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--weight-medium);
+  color: var(--text-normal);
+  margin-top: var(--cyber-3x);
+  opacity: 0.9;
+}
+
+/* Code Blocks - Hacker Terminal Interface */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-cyber-mono);
+  font-feature-settings: var(--font-features-mono);
+  background: var(--code-background);
+  color: var(--code-text);
+  border: 2px solid var(--code-border);
+  border-radius: 4px;
+  position: relative;
+}
+
+.markdown-preview-view pre {
+  padding: var(--cyber-4x);
+  margin: var(--cyber-4x) 0;
+  line-height: 1.5;
+  overflow-x: auto;
+  box-shadow: 
+    0 0 20px var(--code-border),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: neon-glow 4s ease-in-out infinite;
+}
+
+.markdown-preview-view pre::before {
+  content: '[ HACKING IN PROGRESS ]';
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: var(--font-size-xs);
+  color: var(--neon-orange);
+  background: var(--cyber-black);
+  padding: 2px 6px;
+  border: 1px solid var(--neon-orange);
+  animation: cyber-pulse 1s ease-in-out infinite;
+}
+
+.markdown-preview-view code {
+  padding: 4px 8px;
+  font-size: 0.9em;
+  font-weight: var(--weight-medium);
+  text-shadow: 0 0 3px currentColor;
+}
+
+/* Tables - Data Matrix Display */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  border: 3px solid var(--neon-cyan);
+  margin: var(--cyber-6x) 0;
+  font-family: var(--font-cyber-mono);
+  font-feature-settings: var(--font-features-mono);
+  font-size: var(--font-size-sm);
+  width: 100%;
+  background: var(--cyber-void-1);
+  box-shadow: 
+    0 0 30px var(--neon-cyan),
+    inset 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+.markdown-preview-view th {
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta));
+  color: var(--cyber-black);
+  font-family: var(--font-cyber-display);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--font-size-xs);
+  padding: var(--cyber-2x);
+  text-align: center;
+  border: 1px solid var(--neon-cyan);
+  animation: neon-glow 3s ease-in-out infinite;
+}
+
+.markdown-preview-view td {
+  padding: var(--cyber-2x);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-green);
+  text-align: center;
+  background: rgba(0, 255, 255, 0.03);
+}
+
+.markdown-preview-view tr:nth-child(even) td {
+  background: rgba(255, 0, 255, 0.03);
+}
+
+/* Blockquotes - System Alerts */
+.markdown-preview-view blockquote {
+  border: 2px solid var(--neon-orange);
+  border-left: 6px solid var(--neon-orange);
+  background: linear-gradient(135deg, 
+    var(--cyber-void-2) 0%, 
+    var(--cyber-void-3) 50%, 
+    var(--cyber-void-2) 100%);
+  margin: var(--cyber-6x) 0;
+  padding: var(--cyber-4x);
+  position: relative;
+  box-shadow: 
+    0 0 25px var(--neon-orange),
+    inset 0 0 25px rgba(255, 102, 0, 0.1);
+  animation: neon-glow 2s ease-in-out infinite;
+}
+
+.markdown-preview-view blockquote::before {
+  content: '⚠ SYSTEM ALERT ⚠';
+  position: absolute;
+  top: 8px;
+  left: var(--cyber-4x);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  color: var(--neon-orange);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-cyber-display);
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+.markdown-preview-view blockquote p:first-child {
+  margin-top: var(--cyber-3x);
+  color: var(--neon-yellow);
+}
+
+/* Links - Cyber Navigation */
+.markdown-preview-view a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-family: var(--font-cyber-body);
+  font-weight: var(--weight-semibold);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px currentColor;
+  position: relative;
+  overflow: hidden;
+}
+
+.markdown-preview-view a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 255, 255, 0.3), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.markdown-preview-view a:hover {
+  color: var(--cyber-black);
+  background: var(--neon-cyan);
+  border-bottom-color: var(--neon-magenta);
+  box-shadow: 0 0 20px var(--neon-cyan);
+  text-shadow: none;
+}
+
+.markdown-preview-view a:hover::before {
+  left: 100%;
+}
+
+/* Lists - Data Streams */
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+  margin: var(--cyber-3x) 0;
+  padding-left: var(--cyber-6x);
+  font-family: var(--font-cyber-body);
+}
+
+.markdown-preview-view li {
+  margin-bottom: var(--cyber-2x);
+  line-height: 1.6;
+  position: relative;
+}
+
+.markdown-preview-view ul li::marker {
+  content: '▶';
+  color: var(--neon-magenta);
+}
+
+.markdown-preview-view ol li::marker {
+  color: var(--neon-cyan);
+  font-weight: var(--weight-bold);
+}
+
+/* Strong and Emphasis - Cyber Enhancement */
+.markdown-preview-view strong {
+  font-weight: var(--weight-bold);
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px currentColor;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: cyber-pulse 2s ease-in-out infinite;
+}
+
+.markdown-preview-view em {
+  font-style: normal;
+  color: var(--neon-yellow);
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 0, 0.2) 50%, 
+    transparent 70%);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* Horizontal Rules - System Dividers */
+.markdown-preview-view hr {
+  border: none;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--neon-cyan), 
+    var(--neon-magenta), 
+    var(--neon-yellow), 
+    var(--neon-cyan));
+  margin: var(--cyber-8x) 0;
+  border-radius: 2px;
+  box-shadow: 0 0 20px var(--neon-cyan);
+  animation: neon-glow 3s ease-in-out infinite;
+  position: relative;
+}
+
+.markdown-preview-view hr::before {
+  content: '<<<  TRANSMISSION BREAK  >>>';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--neon-cyan);
+  font-family: var(--font-cyber-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.2em;
+  background: var(--cyber-black);
+  padding: 4px 8px;
+  border: 1px solid var(--neon-cyan);
+}
+
+/* ============================================
+   PRINT MEDIA - REMOVE CYBER EFFECTS
+   ============================================ */
+
+@media print {
+  * {
+    animation: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background: white !important;
+    color: black !important;
+  }
+  
+  .markdown-preview-view::before {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   HACKERS (1995) THEME DOCUMENTATION
+   ============================================
+   
+   Inspired by the cyberpunk aesthetic of Hackers (1995)
+   - MTV-influenced visual design and acid house/rave culture
+   - Stylized interface design beyond realism
+   - Electric color palette: cyan, magenta, neon green
+   - Typography as rebellion against corporate aesthetics
+   - 3D typography and experimental interface elements
+   - Street art and graffiti influences in typography choices
+   
+   Historical Context:
+   - Released 1995, height of cyberpunk culture
+   - MTV-style editing and visual effects
+   - Rave/electronic music culture influence
+   - Post-internet early web aesthetic
+   - Hacker culture as counter-culture movement
+   
+   Quality Level: Suitable for review by design and cyberpunk culture experts
+   ============================================ */

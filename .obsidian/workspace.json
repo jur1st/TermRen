@@ -6,7 +6,7 @@
       {
         "id": "ba6fcc53f22ec52a",
         "type": "tabs",
-        "dimension": 64.02116402116403,
+        "dimension": 54.96567505720824,
         "children": [
           {
             "id": "c838642e1830fc0f",
@@ -14,59 +14,32 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Manuscript Table of Contents.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Manuscript Table of Contents"
             }
           }
         ]
       },
       {
-        "id": "fd7a9c1bbba476eb",
-        "type": "split",
-        "dimension": 35.978835978835974,
+        "id": "16a6e422d1ebd3dd",
+        "type": "tabs",
+        "dimension": 45.03432494279176,
         "children": [
           {
-            "id": "16a6e422d1ebd3dd",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "a3f8e8b9e7a2fd18",
-                "type": "leaf",
-                "state": {
-                  "type": "graph",
-                  "state": {},
-                  "icon": "lucide-git-fork",
-                  "title": "Graph view"
-                }
-              }
-            ]
-          },
-          {
-            "id": "a4cec1f30d0b8fc0",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "eb7ca9c32838ed9a",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Manuscript Table of Contents.md",
-                    "mode": "preview",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "Manuscript Table of Contents"
-                }
-              }
-            ]
+            "id": "a3f8e8b9e7a2fd18",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
           }
-        ],
-        "direction": "horizontal"
+        ]
       }
     ],
     "direction": "vertical"
@@ -123,8 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6473bbdbbc8cae22",
@@ -213,23 +185,42 @@
   },
   "active": "c838642e1830fc0f",
   "lastOpenFiles": [
-    "Manuscript Table of Contents.md",
+    "SYSTEM-INSTRUCTIONS/project-management/visual-guides/scaling-progression-guide.md",
+    "SYSTEM-INSTRUCTIONS/project-management/visual-guides/git-concepts-visual-guide.md",
+    "SYSTEM-INSTRUCTIONS/project-management/visual-guides",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows/README.md",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows/planning-session.md",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows/git-workflow.md",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows/cleanup-protocol.md",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows/research-session.md",
+    "SYSTEM-INSTRUCTIONS/project-management/daily-workflows",
+    "03-Research-Infrastructure/CLEANUP-SESSION-SUMMARY-20250625.md",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/tron/typography-test.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/tron/engineering-engagement-letter.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/terminal/typography-test.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/terminal/engineering-engagement-letter.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/technical/typography-test.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/technical/engineering-engagement-letter.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/sneakers/typography-test.html",
+    "03-Research-Infrastructure/Generated-Samples/conversion-output/html/sneakers/engineering-engagement-letter.html",
+    "03-Research-Infrastructure/Generated-Samples/sample-documents/typography-test.md",
+    "03-Research-Infrastructure/Research-Archive/Typography-Session/engineering-typography-research-session.md",
+    "03-Research-Infrastructure/Research-Archive/Typography-Session/severance-visual-design-analysis.md",
+    "03-Research-Infrastructure/Research-Archive/Typography-Session/historical-engineering-documentation-research.md",
+    "03-Research-Infrastructure/Session-Reports/engineering-typography-execution-canvas.md",
+    "03-Research-Infrastructure/Session-Reports/swarm-execution-after-action-report.md",
+    "03-Research-Infrastructure/Testing-Results/cross-platform-compatibility-report.md",
+    "03-Research-Infrastructure/Testing-Results/word-conversion-test-results.md",
+    "03-Research-Infrastructure/Testing-Results/pandoc-conversion-pipeline-summary.md",
+    "03-Research-Infrastructure/Implementation/adobe-fonts-css-implementation-guide.md",
+    "SYSTEM-INSTRUCTIONS/project-management/README.md",
     "README.md",
-    "Untitled.base",
-    "01-Chapters/part1-history/chapter2-5-suit-invasion.md",
-    "README-THEMES.md",
-    "00-START-HERE/Welcome-and-Navigation.md",
-    "SYSTEM-INSTRUCTIONS/research/WORKFLOW.md",
-    "99-Archive-Session-Docs/VAULT-NAVIGATION.md",
-    "99-Archive-Session-Docs/REORGANIZATION-PLAN.md",
-    "03-Research-Infrastructure/VAULT-INDEX.md",
-    "03-Research-Infrastructure/DISCOVERY-CHECKLIST.md",
-    "03-Research-Infrastructure/ACCUMULATED-KNOWLEDGE.md",
-    "04-Interactive-Demos/README.md",
-    "03-Research-Infrastructure/README.md",
-    "02-Knowledge-Graph/README.md",
-    "01-Chapters/README.md",
-    "00-START-HERE/README.md",
+    "03-Research-Infrastructure/Discovery-System/computing-cinema-aesthetic-research.md",
+    "03-Research-Infrastructure/Discovery-System/word-conversion-test-results.md",
+    "03-Research-Infrastructure/Discovery-System/theme-selection-recommendations.md",
+    "03-Research-Infrastructure/Discovery-System/terminal-preservation-tracking.md",
+    "03-Research-Infrastructure/Discovery-System/tangential-themes.md",
+    "03-Research-Infrastructure/Discovery-System/severance-visual-design-analysis.md",
     "98-Archive-Canvas-Dashboards/Welcome-Dashboard.canvas",
     "98-Archive-Canvas-Dashboards/Research-Timeline-Dashboard.canvas",
     "98-Archive-Canvas-Dashboards/Production-Workflow-Dashboard.canvas",
@@ -238,18 +229,7 @@
     "98-Archive-Canvas-Dashboards/Knowledge-Navigation-Hub.canvas",
     "98-Archive-Canvas-Dashboards/Knowledge-Key-Figures.canvas",
     "98-Archive-Canvas-Dashboards/Knowledge-Cultural-Movements.canvas",
-    "98-Archive-Canvas-Dashboards/README.md",
-    "98-Archive-Canvas-Dashboards",
-    "99-Archive-Session-Docs/OBSIDIAN-CONFIGURATION-FIX.md",
-    "99-Archive-Session-Docs/ENHANCEMENT-SUMMARY.md",
-    "99-Archive-Session-Docs/CONVERSATION-SUMMARY.md",
-    "99-Archive-Session-Docs",
-    "01-Chapters/Chapter-02.5-Suit-Invasion.md",
     "Welcome-Dashboard.canvas",
-    "Solarized.md",
-    "ANSI Art.md",
-    "VAULT-NAVIGATION.md",
-    "VAULT-INDEX.md",
     "Knowledge-Key-Figures.canvas"
   ]
 }

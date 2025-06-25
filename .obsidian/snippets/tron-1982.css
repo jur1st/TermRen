@@ -1,0 +1,527 @@
+/* ============================================
+   TRON (1982) - Digital Frontier Aesthetics Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Inspired by Syd Mead's Geometric Design & Early Computer Graphics
+   Enhanced with Professional Typography System
+   ============================================ */
+
+/* Adobe Fonts Integration for Professional Quality */
+@import url('https://use.typekit.net/afz6rqj.css');
+
+/* Optimized Font Loading for Performance */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal italic;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+
+/* @settings
+
+name: Tron (1982) Digital Frontier Theme
+id: tron-1982
+settings:
+  -
+    id: tron-accent-color
+    title: Grid Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#00D4FF'
+    default-dark: '#7DFDFE'
+  -
+    id: tron-grid-intensity
+    title: Grid Intensity
+    type: variable-number-slider
+    default: 0.3
+    min: 0.1
+    max: 1.0
+    step: 0.1
+  -
+    id: tron-grid-size
+    title: Grid Unit Size
+    type: variable-number-slider
+    default: 8
+    min: 4
+    max: 16
+    step: 1
+    format: px
+*/
+
+:root {
+  /* Tron Color Palette - Authentic 1982 Digital Colors */
+  --tron-blue-primary: #7DFDFE;     /* Official Tron Blue RGB: 125, 253, 254 */
+  --tron-blue-electric: #00D4FF;    /* Electric Blue */
+  --tron-blue-dark: #0099CC;        /* Deep Blue */
+  --tron-cyan-bright: #00FFFF;      /* Electric Cyan */
+  --tron-white: #FFFFFF;            /* Pure White Grid Lines */
+  --tron-orange: #FF6600;           /* Danger/Warning Orange */
+  
+  /* Digital Black & Void Colors */
+  --void-black: #000000;            /* Pure Black Void */
+  --void-gray-1: #0A0A0A;          /* Near Black */
+  --void-gray-2: #151515;          /* Dark Gray */
+  --void-gray-3: #1F1F1F;          /* Medium Dark */
+  --void-gray-4: #2A2A2A;          /* Light Dark */
+  --void-gray-5: #333333;          /* Medium Gray */
+  
+  /* Light World Colors */
+  --light-gray-1: #F0F0F0;         /* Light Background */
+  --light-gray-2: #E0E0E0;         /* Light Border */
+  --light-gray-3: #D0D0D0;         /* Medium Light */
+  --light-gray-4: #B0B0B0;         /* Dark Light */
+  --light-gray-5: #808080;         /* Medium */
+  
+  /* Grid System - Geometric 8px Base */
+  --grid-unit: var(--tron-grid-size, 8px);
+  --grid-2x: calc(var(--grid-unit) * 2);
+  --grid-3x: calc(var(--grid-unit) * 3);
+  --grid-4x: calc(var(--grid-unit) * 4);
+  --grid-6x: calc(var(--grid-unit) * 6);
+  --grid-8x: calc(var(--grid-unit) * 8);
+  
+  /* Geometric Typography Stack - Digital Precision */
+  --font-geometric: 'Source Sans Pro', 'Inter', 'SF Pro', system-ui, -apple-system, sans-serif;
+  --font-mono-digital: 'Source Code Pro', 'JetBrains Mono', 'Fira Code', ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-display: 'Source Sans Pro', 'Inter', system-ui, sans-serif;
+  
+  /* Font Weights - Precise Digital */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+  
+  /* Professional Typography Features */
+  --font-features-geometric: 'kern' 1, 'liga' 0, 'calt' 0;  /* Geometric precision */
+  --font-features-tabular: 'kern' 1, 'liga' 0, 'tnum' 1, 'lnum' 1;
+  
+  /* Font Size Scale - Perfect Geometric Progression */
+  --font-scale: 1.25;  /* Perfect Fifth - Mathematical harmony */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
+  
+  /* Grid Overlay Settings */
+  --grid-opacity: var(--tron-grid-intensity, 0.3);
+  --grid-line-width: 1px;
+}
+
+.theme-light {
+  /* Light Mode - Real World Aesthetic */
+  --background-primary: var(--tron-white);
+  --background-primary-alt: var(--light-gray-1);
+  --background-secondary: var(--light-gray-2);
+  --background-modifier-border: var(--light-gray-3);
+  
+  --text-normal: var(--void-black);
+  --text-muted: var(--void-gray-5);
+  --text-faint: var(--light-gray-4);
+  
+  --interactive-accent: var(--tron-accent-color, var(--tron-blue-electric));
+  --interactive-accent-hover: var(--tron-blue-primary);
+  
+  --code-background: var(--light-gray-1);
+  --code-border: var(--tron-blue-electric);
+  --grid-color: var(--tron-blue-electric);
+}
+
+.theme-dark {
+  /* Dark Mode - Digital Frontier */
+  --background-primary: var(--void-black);
+  --background-primary-alt: var(--void-gray-1);
+  --background-secondary: var(--void-gray-2);
+  --background-modifier-border: var(--void-gray-4);
+  
+  --text-normal: var(--tron-blue-primary);
+  --text-muted: var(--tron-blue-dark);
+  --text-faint: var(--void-gray-5);
+  
+  --interactive-accent: var(--tron-accent-color, var(--tron-blue-primary));
+  --interactive-accent-hover: var(--tron-cyan-bright);
+  
+  --code-background: var(--void-gray-1);
+  --code-border: var(--tron-blue-primary);
+  --grid-color: var(--tron-blue-primary);
+}
+
+/* ============================================
+   DIGITAL GRID OVERLAY (Optional Enhancement)
+   ============================================ */
+
+.tron-grid-overlay::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--grid-opacity);
+  background-image: 
+    linear-gradient(to right, var(--grid-color) var(--grid-line-width), transparent var(--grid-line-width)),
+    linear-gradient(to bottom, var(--grid-color) var(--grid-line-width), transparent var(--grid-line-width));
+  background-size: var(--grid-4x) var(--grid-4x);
+}
+
+/* ============================================
+   MARKDOWN CONTENT - DIGITAL PRECISION
+   ============================================ */
+
+/* Reading and Writing Areas - Geometric Digital Layout */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-geometric);
+  font-feature-settings: var(--font-features-geometric);
+  font-variant-numeric: lining-nums;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--grid-4x);
+  max-width: calc(var(--grid-unit) * 100);
+  margin: 0 auto;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* Headers - Syd Mead Geometric Style */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-display);
+  font-feature-settings: var(--font-features-geometric);
+  line-height: 1.2;
+  margin-top: var(--grid-4x);
+  margin-bottom: var(--grid-2x);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* H1 - System Headers */
+.markdown-preview-view h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--weight-black);
+  color: var(--interactive-accent);
+  border-bottom: 3px solid var(--interactive-accent);
+  padding-bottom: var(--grid-2x);
+  margin-bottom: var(--grid-4x);
+  text-shadow: 0 0 10px var(--interactive-accent);
+  position: relative;
+}
+
+.markdown-preview-view h1::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--interactive-accent);
+  box-shadow: 0 0 15px var(--interactive-accent);
+}
+
+/* H2 - Program Headers */
+.markdown-preview-view h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--interactive-accent);
+  margin-top: var(--grid-6x);
+  margin-bottom: var(--grid-2x);
+  position: relative;
+}
+
+.markdown-preview-view h2::before {
+  content: '▶';
+  color: var(--interactive-accent);
+  margin-right: var(--grid-unit);
+  font-size: 0.8em;
+}
+
+/* H3-H6 - Subsystem Headers */
+.markdown-preview-view h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-normal);
+  margin-top: var(--grid-3x);
+}
+
+.markdown-preview-view h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-normal);
+  margin-top: var(--grid-3x);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+  margin-top: var(--grid-2x);
+}
+
+/* Code Blocks - Digital Terminal Style */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-mono-digital);
+  font-feature-settings: var(--font-features-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  background: var(--code-background);
+  border: 2px solid var(--code-border);
+  border-radius: 0;
+  position: relative;
+}
+
+.markdown-preview-view pre {
+  padding: var(--grid-3x);
+  margin: var(--grid-3x) 0;
+  line-height: 1.4;
+  overflow-x: auto;
+  box-shadow: 
+    0 0 20px var(--code-border),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.markdown-preview-view pre::before {
+  content: '> SYSTEM';
+  position: absolute;
+  top: var(--grid-unit);
+  left: var(--grid-2x);
+  font-size: var(--font-size-xs);
+  color: var(--interactive-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.markdown-preview-view code {
+  padding: 4px 8px;
+  font-size: 0.9em;
+  font-weight: var(--weight-medium);
+  box-shadow: 0 0 5px var(--code-border);
+}
+
+/* Tables - Data Grid Style */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  border: 2px solid var(--interactive-accent);
+  margin: var(--grid-4x) 0;
+  font-family: var(--font-mono-digital);
+  font-feature-settings: var(--font-features-tabular);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--font-size-sm);
+  width: 100%;
+  box-shadow: 0 0 30px var(--interactive-accent);
+}
+
+.markdown-preview-view th {
+  background: var(--interactive-accent);
+  color: var(--void-black);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--font-size-xs);
+  padding: var(--grid-2x);
+  text-align: left;
+  border: 1px solid var(--interactive-accent);
+}
+
+.markdown-preview-view td {
+  padding: var(--grid-2x);
+  border: 1px solid var(--interactive-accent);
+  font-variant-numeric: tabular-nums;
+  background: rgba(125, 253, 254, 0.05);
+}
+
+/* Blockquotes - System Messages */
+.markdown-preview-view blockquote {
+  border: 2px solid var(--interactive-accent);
+  border-left: 6px solid var(--interactive-accent);
+  background: var(--background-secondary);
+  margin: var(--grid-4x) 0;
+  padding: var(--grid-3x);
+  position: relative;
+  box-shadow: 
+    0 0 20px var(--interactive-accent),
+    inset 0 0 20px rgba(125, 253, 254, 0.1);
+}
+
+.markdown-preview-view blockquote::before {
+  content: 'SYSTEM MESSAGE';
+  position: absolute;
+  top: var(--grid-unit);
+  left: var(--grid-3x);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  color: var(--interactive-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+}
+
+.markdown-preview-view blockquote p:first-child {
+  margin-top: var(--grid-2x);
+}
+
+/* Links - Digital Pathways */
+.markdown-preview-view a {
+  color: var(--interactive-accent);
+  text-decoration: none;
+  font-family: var(--font-geometric);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px var(--interactive-accent);
+}
+
+.markdown-preview-view a:hover {
+  background: var(--interactive-accent);
+  color: var(--void-black);
+  border-bottom-color: var(--interactive-accent);
+  box-shadow: 0 0 15px var(--interactive-accent);
+  text-shadow: none;
+}
+
+/* Lists - Program Structures */
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+  margin: var(--grid-2x) 0;
+  padding-left: var(--grid-4x);
+  font-family: var(--font-geometric);
+}
+
+.markdown-preview-view li {
+  margin-bottom: var(--grid-unit);
+  line-height: 1.5;
+  position: relative;
+}
+
+.markdown-preview-view ul li::marker {
+  content: '▶';
+  color: var(--interactive-accent);
+}
+
+.markdown-preview-view ol li::marker {
+  color: var(--interactive-accent);
+  font-weight: var(--weight-bold);
+}
+
+/* Strong and Emphasis - Digital Emphasis */
+.markdown-preview-view strong {
+  font-weight: var(--weight-bold);
+  color: var(--interactive-accent);
+  text-shadow: 0 0 3px var(--interactive-accent);
+}
+
+.markdown-preview-view em {
+  font-style: normal;
+  color: var(--interactive-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9em;
+}
+
+/* Horizontal Rules - Digital Dividers */
+.markdown-preview-view hr {
+  border: none;
+  height: 2px;
+  background: var(--interactive-accent);
+  margin: var(--grid-6x) 0;
+  box-shadow: 0 0 10px var(--interactive-accent);
+  position: relative;
+}
+
+.markdown-preview-view hr::before {
+  content: '◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊◊';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--interactive-accent);
+  font-family: var(--font-mono-digital);
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+/* ============================================
+   TRON AESTHETIC ENHANCEMENTS
+   ============================================ */
+
+/* Geometric Grid Pattern Background (Subtle) */
+.markdown-preview-view {
+  background-image: 
+    linear-gradient(90deg, transparent calc(var(--grid-4x) - 1px), var(--grid-color) var(--grid-4x)),
+    linear-gradient(transparent calc(var(--grid-4x) - 1px), var(--grid-color) var(--grid-4x));
+  background-size: var(--grid-4x) var(--grid-4x);
+  background-attachment: local;
+  background-opacity: 0.02;
+}
+
+/* Digital Glow Effect for Interactive Elements */
+.markdown-preview-view a,
+.markdown-preview-view code,
+.markdown-preview-view strong {
+  transition: all 0.3s ease;
+}
+
+.markdown-preview-view a:hover,
+.markdown-preview-view code:hover,
+.markdown-preview-view strong:hover {
+  text-shadow: 0 0 10px var(--interactive-accent);
+}
+
+/* ============================================
+   PRINT MEDIA OPTIMIZATION
+   ============================================ */
+
+@media print {
+  :root {
+    /* Remove digital effects for print */
+    --grid-opacity: 0;
+  }
+  
+  .markdown-preview-view {
+    background-image: none;
+  }
+  
+  .markdown-preview-view *:hover {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ============================================
+   TRON (1982) THEME DOCUMENTATION
+   ============================================
+   
+   Inspired by Syd Mead's geometric design for Disney's Tron (1982)
+   - Authentic Tron Blue color palette (#7DFDFE)
+   - Geometric typography reflecting early computer graphics constraints
+   - Grid-based design principles from the film's digital world
+   - Professional typography with Adobe Fonts integration
+   - Digital aesthetic with subtle glow effects
+   - Optimized for both screen and print media
+   
+   Historical Context:
+   - Released 1982, groundbreaking computer graphics
+   - Syd Mead's futuristic industrial design
+   - Early CGI aesthetic and vector graphics influence
+   - Mathematical precision in design choices
+   
+   Quality Level: Suitable for review by design and computing luminaries
+   ============================================ */

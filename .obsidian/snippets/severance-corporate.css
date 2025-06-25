@@ -1,0 +1,602 @@
+/* ============================================
+   SEVERANCE - Corporate Modernist Precision Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Inspired by Lumon Industries Corporate Design Language
+   Enhanced with Professional Typography System
+   ============================================ */
+
+/* Adobe Fonts Integration for Professional Quality */
+@import url('https://use.typekit.net/afz6rqj.css');
+
+/* Corporate Typeface Integration */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Optimized Font Loading for Performance */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal italic;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  font-weight: 300 800;
+  font-style: normal;
+}
+
+/* @settings
+
+name: Severance Corporate Precision Theme
+id: severance-corporate
+settings:
+  -
+    id: severance-corporate-color
+    title: Corporate Accent Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#2B5CE6'
+    default-dark: '#4B7EFF'
+  -
+    id: severance-precision-level
+    title: Corporate Precision Level
+    description: How precise should the corporate aesthetic be?
+    type: variable-number-slider
+    default: 0.8
+    min: 0.5
+    max: 1.0
+    step: 0.1
+  -
+    id: severance-lumon-mode
+    title: Lumon Corporate Mode
+    description: Maximum corporate control aesthetic
+    type: class-toggle
+    default: false
+*/
+
+:root {
+  /* Severance Corporate Color Palette - Systematic Control */
+  --lumon-blue: #2B5CE6;            /* Primary corporate blue */
+  --lumon-blue-light: #4B7EFF;      /* Light corporate blue */
+  --lumon-blue-dark: #1E4BCC;       /* Dark corporate blue */
+  --lumon-teal: #00B5B8;            /* Corporate teal accent */
+  --lumon-yellow: #F7C52D;          /* Wayfinding yellow */
+  --lumon-red: #E85D75;             /* Alert/warning red */
+  --lumon-green: #4CAF50;           /* Success/approval green */
+  
+  /* Corporate Neutral Scale - Systematic Grays */
+  --corporate-white: #FFFFFF;        /* Pure corporate white */
+  --corporate-off-white: #FAFAFA;    /* Subtle off-white */
+  --corporate-light-1: #F5F5F5;     /* Light background */
+  --corporate-light-2: #EEEEEE;     /* Lighter gray */
+  --corporate-gray-1: #E0E0E0;      /* Light gray */
+  --corporate-gray-2: #BDBDBD;      /* Medium light gray */
+  --corporate-gray-3: #9E9E9E;      /* Medium gray */
+  --corporate-gray-4: #757575;      /* Medium dark gray */
+  --corporate-gray-5: #616161;      /* Dark gray */
+  --corporate-gray-6: #424242;      /* Darker gray */
+  --corporate-gray-7: #212121;      /* Near black */
+  --corporate-black: #000000;       /* Pure black */
+  
+  /* Corporate Beige/Tan System - Lumon Aesthetic */
+  --lumon-beige-1: #F8F6F0;         /* Light beige */
+  --lumon-beige-2: #F0EDE5;         /* Medium beige */
+  --lumon-beige-3: #E8E3D8;         /* Darker beige */
+  --lumon-tan: #D4C4A8;             /* Corporate tan */
+  
+  /* Grid System - Corporate Precision */
+  --corporate-unit: 8px;             /* Base 8px grid */
+  --corporate-2x: calc(var(--corporate-unit) * 2);
+  --corporate-3x: calc(var(--corporate-unit) * 3);
+  --corporate-4x: calc(var(--corporate-unit) * 4);
+  --corporate-6x: calc(var(--corporate-unit) * 6);
+  --corporate-8x: calc(var(--corporate-unit) * 8);
+  --corporate-12x: calc(var(--corporate-unit) * 12);
+  
+  /* Corporate Typography Stack - Systematic Control */
+  --font-corporate-display: 'Inter', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-corporate-body: 'Source Sans Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-corporate-mono: 'Source Code Pro', 'SF Mono', ui-monospace, Monaco, 'Cascadia Code', monospace;
+  --font-corporate-data: 'Inter', 'SF Pro', system-ui, sans-serif;
+  
+  /* Font Weights - Corporate Hierarchy */
+  --weight-ultralight: 200;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  
+  /* Professional Typography Features - Corporate Standards */
+  --font-features-corporate: 'kern' 1, 'liga' 1, 'clig' 1, 'calt' 1;
+  --font-features-tabular: 'kern' 1, 'liga' 0, 'tnum' 1, 'lnum' 1;
+  --font-features-display: 'kern' 1, 'liga' 1, 'calt' 1, 'case' 1;
+  
+  /* Font Size Scale - Golden Ratio Corporate Hierarchy */
+  --font-scale: 1.618;  /* Golden ratio - perfect corporate harmony */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 48px;
+  
+  /* Corporate Effects Variables */
+  --precision-level: var(--severance-precision-level, 0.8);
+  --corporate-opacity: calc(var(--precision-level) * 0.1);
+  --control-intensity: var(--precision-level);
+}
+
+.theme-light {
+  /* Light Mode - Corporate Daylight */
+  --background-primary: var(--corporate-white);
+  --background-primary-alt: var(--corporate-off-white);
+  --background-secondary: var(--corporate-light-1);
+  --background-modifier-border: var(--corporate-gray-1);
+  
+  --text-normal: var(--corporate-gray-7);
+  --text-muted: var(--corporate-gray-4);
+  --text-faint: var(--corporate-gray-3);
+  
+  --interactive-accent: var(--severance-corporate-color, var(--lumon-blue));
+  --interactive-accent-hover: var(--lumon-blue-dark);
+  
+  --code-background: var(--lumon-beige-1);
+  --code-border: var(--corporate-gray-2);
+  --table-header-bg: var(--lumon-blue);
+  --table-stripe: var(--lumon-beige-1);
+}
+
+.theme-dark {
+  /* Dark Mode - After Hours Corporate */
+  --background-primary: var(--corporate-gray-7);
+  --background-primary-alt: var(--corporate-gray-6);
+  --background-secondary: var(--corporate-gray-6);
+  --background-modifier-border: var(--corporate-gray-4);
+  
+  --text-normal: var(--corporate-light-1);
+  --text-muted: var(--corporate-gray-2);
+  --text-faint: var(--corporate-gray-3);
+  
+  --interactive-accent: var(--severance-corporate-color, var(--lumon-blue-light));
+  --interactive-accent-hover: var(--lumon-teal);
+  
+  --code-background: var(--corporate-gray-6);
+  --code-border: var(--corporate-gray-4);
+  --table-header-bg: var(--lumon-blue-light);
+  --table-stripe: rgba(75, 126, 255, 0.05);
+}
+
+/* Lumon Corporate Mode - Maximum Control Aesthetic */
+.severance-lumon-mode {
+  --corporate-unit: 8px;  /* Strict 8px grid enforcement */
+  --precision-level: 1.0;
+  --control-intensity: 1.0;
+}
+
+.severance-lumon-mode * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.severance-lumon-mode .markdown-preview-view * {
+  margin-top: calc(var(--corporate-unit) * round(var(--margin-top, 0) / var(--corporate-unit)));
+  margin-bottom: calc(var(--corporate-unit) * round(var(--margin-bottom, 0) / var(--corporate-unit)));
+}
+
+/* ============================================
+   CORPORATE VISUAL SYSTEM
+   ============================================ */
+
+/* Subtle corporate grid overlay */
+.severance-lumon-mode .markdown-preview-view::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--corporate-opacity);
+  background-image: 
+    linear-gradient(to right, var(--corporate-gray-2) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--corporate-gray-2) 1px, transparent 1px);
+  background-size: var(--corporate-8x) var(--corporate-8x);
+}
+
+/* ============================================
+   MARKDOWN CONTENT - CORPORATE PRECISION
+   ============================================ */
+
+/* Reading and Writing Areas - Corporate Document Standards */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-corporate-body);
+  font-feature-settings: var(--font-features-corporate);
+  font-variant-numeric: proportional-nums;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--corporate-6x);
+  max-width: calc(var(--corporate-unit) * 90);  /* 720px at 8px base */
+  margin: 0 auto;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-size: var(--font-size-md);
+}
+
+/* Headers - Corporate Hierarchy System */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-corporate-display);
+  font-feature-settings: var(--font-features-display);
+  line-height: 1.25;
+  margin-top: var(--corporate-8x);
+  margin-bottom: var(--corporate-4x);
+  letter-spacing: -0.02em;
+  color: var(--text-normal);
+}
+
+/* H1 - Department/Division Headers */
+.markdown-preview-view h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--weight-extrabold);
+  color: var(--interactive-accent);
+  text-align: left;
+  margin: var(--corporate-12x) 0 var(--corporate-8x) 0;
+  padding-bottom: var(--corporate-4x);
+  border-bottom: 2px solid var(--interactive-accent);
+  position: relative;
+}
+
+.markdown-preview-view h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 4px;
+  background: var(--interactive-accent);
+  margin-bottom: var(--corporate-2x);
+}
+
+/* H2 - Section Headers */
+.markdown-preview-view h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--interactive-accent);
+  margin-top: var(--corporate-12x);
+  margin-bottom: var(--corporate-4x);
+  padding-left: var(--corporate-3x);
+  border-left: 4px solid var(--interactive-accent);
+}
+
+/* H3 - Subsection Headers */
+.markdown-preview-view h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-normal);
+  margin-top: var(--corporate-8x);
+  margin-bottom: var(--corporate-3x);
+}
+
+.markdown-preview-view h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-normal);
+  margin-top: var(--corporate-6x);
+  margin-bottom: var(--corporate-2x);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+  margin-top: var(--corporate-4x);
+  margin-bottom: var(--corporate-2x);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--font-size-sm);
+}
+
+/* Code Blocks - Technical Documentation Standards */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-corporate-mono);
+  font-feature-settings: var(--font-features-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  background: var(--code-background);
+  border: 1px solid var(--code-border);
+  border-radius: 4px;
+  font-size: var(--font-size-sm);
+}
+
+.markdown-preview-view pre {
+  padding: var(--corporate-4x);
+  margin: var(--corporate-6x) 0;
+  line-height: 1.4;
+  overflow-x: auto;
+  border-left: 4px solid var(--interactive-accent);
+}
+
+.markdown-preview-view code {
+  padding: 2px 6px;
+  font-weight: var(--weight-medium);
+  border-radius: 2px;
+}
+
+/* Tables - Corporate Data Presentation */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  border: 2px solid var(--interactive-accent);
+  margin: var(--corporate-8x) 0;
+  font-family: var(--font-corporate-data);
+  font-feature-settings: var(--font-features-tabular);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--font-size-sm);
+  width: 100%;
+  background: var(--background-primary);
+}
+
+.markdown-preview-view th {
+  background: var(--table-header-bg);
+  color: var(--corporate-white);
+  font-family: var(--font-corporate-display);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--font-size-xs);
+  padding: var(--corporate-3x) var(--corporate-4x);
+  text-align: left;
+  border: 1px solid var(--interactive-accent);
+}
+
+.markdown-preview-view td {
+  padding: var(--corporate-3x) var(--corporate-4x);
+  border: 1px solid var(--code-border);
+  font-variant-numeric: tabular-nums;
+  vertical-align: top;
+}
+
+.markdown-preview-view tr:nth-child(even) td {
+  background: var(--table-stripe);
+}
+
+/* Blockquotes - Corporate Notices */
+.markdown-preview-view blockquote {
+  border: 1px solid var(--lumon-yellow);
+  border-left: 6px solid var(--lumon-yellow);
+  background: var(--background-secondary);
+  margin: var(--corporate-8x) 0;
+  padding: var(--corporate-6x);
+  position: relative;
+  font-style: normal;
+}
+
+.markdown-preview-view blockquote::before {
+  content: 'NOTICE';
+  position: absolute;
+  top: var(--corporate-2x);
+  left: var(--corporate-6x);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  color: var(--lumon-yellow);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-corporate-display);
+  background: var(--background-secondary);
+  padding: 0 var(--corporate-2x);
+}
+
+.markdown-preview-view blockquote p:first-child {
+  margin-top: var(--corporate-4x);
+}
+
+/* Links - Corporate Navigation */
+.markdown-preview-view a {
+  color: var(--interactive-accent);
+  text-decoration: none;
+  font-family: var(--font-corporate-body);
+  font-weight: var(--weight-medium);
+  border-bottom: 1px solid var(--interactive-accent);
+  transition: all 0.2s ease;
+}
+
+.markdown-preview-view a:hover {
+  background: var(--interactive-accent);
+  color: var(--corporate-white);
+  border-bottom-color: var(--interactive-accent);
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+/* Lists - Corporate Documentation Standards */
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+  margin: var(--corporate-4x) 0;
+  padding-left: var(--corporate-6x);
+  font-family: var(--font-corporate-body);
+}
+
+.markdown-preview-view li {
+  margin-bottom: var(--corporate-2x);
+  line-height: 1.5;
+}
+
+.markdown-preview-view ul li::marker {
+  content: '•';
+  color: var(--interactive-accent);
+  font-weight: var(--weight-bold);
+}
+
+.markdown-preview-view ol li::marker {
+  color: var(--interactive-accent);
+  font-weight: var(--weight-semibold);
+}
+
+/* Task Lists - Corporate Checklists */
+.markdown-preview-view .task-list-item {
+  list-style: none;
+  margin-left: calc(var(--corporate-6x) * -1);
+  padding-left: var(--corporate-6x);
+}
+
+.markdown-preview-view .task-list-item-checkbox {
+  margin-right: var(--corporate-2x);
+  accent-color: var(--interactive-accent);
+}
+
+/* Strong and Emphasis - Corporate Emphasis */
+.markdown-preview-view strong {
+  font-weight: var(--weight-bold);
+  color: var(--interactive-accent);
+  font-family: var(--font-corporate-body);
+}
+
+.markdown-preview-view em {
+  font-style: italic;
+  color: var(--text-normal);
+  font-family: var(--font-corporate-body);
+}
+
+/* Horizontal Rules - Corporate Section Dividers */
+.markdown-preview-view hr {
+  border: none;
+  height: 2px;
+  background: var(--corporate-gray-2);
+  margin: var(--corporate-12x) 0;
+  position: relative;
+}
+
+.markdown-preview-view hr::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 48px;
+  height: 4px;
+  background: var(--interactive-accent);
+}
+
+/* ============================================
+   CORPORATE ENHANCEMENT FEATURES
+   ============================================ */
+
+/* Subtle corporate styling for paragraphs */
+.markdown-preview-view p {
+  margin-top: 0;
+  margin-bottom: var(--corporate-4x);
+  line-height: 1.5;
+  max-width: 65ch;  /* Optimal reading width */
+}
+
+/* Corporate spacing for nested lists */
+.markdown-preview-view li ul,
+.markdown-preview-view li ol {
+  margin-top: var(--corporate-2x);
+  margin-bottom: var(--corporate-2x);
+}
+
+/* Code syntax highlighting enhancements */
+.markdown-preview-view .token.keyword {
+  color: var(--interactive-accent);
+  font-weight: var(--weight-semibold);
+}
+
+.markdown-preview-view .token.string {
+  color: var(--lumon-green);
+}
+
+.markdown-preview-view .token.number {
+  color: var(--lumon-red);
+  font-variant-numeric: tabular-nums;
+}
+
+.markdown-preview-view .token.comment {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   PRINT MEDIA - CORPORATE LETTERHEAD
+   ============================================ */
+
+@media print {
+  :root {
+    /* Corporate print standards */
+    --corporate-unit: 6pt;  /* Standard print sizing */
+  }
+  
+  .markdown-preview-view {
+    font-family: 'Times New Roman', serif !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    color: black !important;
+    background: white !important;
+  }
+  
+  .markdown-preview-view h1,
+  .markdown-preview-view h2,
+  .markdown-preview-view h3 {
+    font-family: 'Arial', sans-serif !important;
+    color: black !important;
+  }
+  
+  /* Corporate letterhead styling */
+  @page {
+    margin: 1in;
+    size: letter;
+    
+    @top-center {
+      content: 'Lumon Industries - Confidential';
+      font-family: 'Arial', sans-serif;
+      font-size: 8pt;
+      color: #666;
+    }
+    
+    @bottom-right {
+      content: counter(page);
+      font-family: 'Arial', sans-serif;
+      font-size: 8pt;
+    }
+  }
+}
+
+/* ============================================
+   SEVERANCE CORPORATE THEME DOCUMENTATION
+   ============================================
+   
+   Inspired by the corporate design language of Severance
+   - Clean, systematic typography reflecting corporate control
+   - Lumon Industries aesthetic with precise grid systems
+   - Modern interpretation of Massimo Vignelli's corporate principles
+   - Professional presentation with subtle psychological undertones
+   - Typography choices that evoke corporate precision and authority
+   - Color relationships supporting themes of control and conformity
+   
+   Historical Context:
+   - Modern corporate design evolution (2020s)
+   - Brutalist architecture influence (Eero Saarinen's Bell Labs)
+   - Systematic corporate identity design principles
+   - Psychology of corporate environmental design
+   - Typography as tool of institutional control
+   
+   Quality Level: Suitable for review by corporate design experts
+   ============================================ */
