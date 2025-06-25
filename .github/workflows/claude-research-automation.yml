@@ -1,3 +1,11 @@
+# ⚠️ EXTREME COST WARNING ⚠️
+# This workflow can incur VERY HIGH COSTS ($1.50-$5.00+ per execution)
+# PARALLEL MODE can multiply costs by 3x or more
+# USAGE ABSOLUTELY REQUIRES EXPLICIT PRE-APPROVAL
+# See SYSTEM-INSTRUCTIONS/github-actions/workflow-approval-process.md
+# EMERGENCY SHUTDOWN: gh workflow disable claude-research-automation.yml
+# LOCAL ALTERNATIVE STRONGLY RECOMMENDED: Use local swarm mode (git worktrees)
+
 name: Claude Research Automation
 
 permissions:
@@ -20,7 +28,7 @@ on:
         required: true
         type: string
       parallel_mode:
-        description: 'Enable parallel processing'
+        description: 'Enable parallel processing (MULTIPLIES COSTS)'
         required: false
         type: boolean
         default: false
@@ -36,6 +44,20 @@ jobs:
     timeout-minutes: 30
     
     steps:
+      - name: 🚨 EXTREME COST WARNING - Research Automation Starting
+        run: |
+          echo "⚠️⚠️⚠️ VERY HIGH COST WORKFLOW STARTING ⚠️⚠️⚠️"
+          echo "Expected cost range: $1.50 - $5.00+ per execution"
+          echo "Parallel mode: ${{ github.event.inputs.parallel_mode || 'false' }}"
+          if [ "${{ github.event.inputs.parallel_mode }}" = "true" ]; then
+            echo "🔥 PARALLEL MODE ENABLED - COSTS WILL MULTIPLY BY 3x+"
+            echo "Expected total cost: $4.50 - $15.00+"
+          fi
+          echo "Task: ${{ github.event.inputs.research_task || 'GitHub triggered research' }}"
+          echo "Start time: $(date)"
+          echo "Repository: ${{ github.repository }}"
+          echo "Run ID: ${{ github.run_id }}"
+          
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -47,10 +69,12 @@ jobs:
           mkdir -p "99-Archive-Session-Docs/$(date +%Y-%m-%d)-workflow-${{ github.run_id }}"
           echo "SESSION_DIR=99-Archive-Session-Docs/$(date +%Y-%m-%d)-workflow-${{ github.run_id }}" >> $GITHUB_ENV
 
-      - name: Research Task Analysis
+      - name: 💰 BILLABLE - Research Task Analysis
         uses: anthropics/claude-code-action@v1
         with:
           prompt: |
+            💰 COST ALERT: This is a billable API interaction (~$0.30-$1.00)
+            
             Analyze the research task and create a comprehensive plan following Terminal Renaissance methodology.
             
             Task: ${{ github.event.inputs.research_task || 'Process GitHub issue/comment request' }}
@@ -66,7 +90,7 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           timeout_minutes: 10
 
-      - name: Parallel Research (if enabled)
+      - name: 🔥 EXTREME COST - Parallel Research (if enabled)
         if: github.event.inputs.parallel_mode == 'true'
         strategy:
           matrix:
@@ -74,6 +98,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           prompt: |
+            🔥 VERY EXPENSIVE: This parallel processing multiplies costs by 3x (~$0.90-$3.00 total)
+            
             Focus on ${{ matrix.research_focus }} aspects of the research task.
             
             Research Focus: ${{ matrix.research_focus }}
@@ -90,10 +116,12 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           timeout_minutes: 15
 
-      - name: Integrate Research Findings
+      - name: 💰 BILLABLE - Integrate Research Findings  
         uses: anthropics/claude-code-action@v1
         with:
           prompt: |
+            💰 COST ALERT: This is a billable API interaction (~$0.50-$1.50)
+            
             Integrate all research findings and update project documentation.
             
             Tasks:
@@ -107,10 +135,12 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           timeout_minutes: 20
 
-      - name: Quality Review
+      - name: 💰 BILLABLE - Quality Review
         uses: anthropics/claude-code-action@v1
         with:
           prompt: |
+            💰 COST ALERT: This is a billable API interaction (~$0.20-$0.60)
+            
             Perform final quality review of all changes.
             
             Review criteria:
@@ -125,8 +155,34 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           timeout_minutes: 10
 
-      - name: Cleanup Temporary Files
+      - name: 📊 Final Cost Summary & Cleanup
+        if: always()
         run: |
+          echo "💰💰💰 FINAL COST SUMMARY 💰💰💰"
+          echo "Workflow: claude-research-automation"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Start time: Earlier in this workflow"
+          echo "End time: $(date)"
+          echo "Parallel mode was: ${{ github.event.inputs.parallel_mode || 'false' }}"
+          
+          if [ "${{ github.event.inputs.parallel_mode }}" = "true" ]; then
+            echo "🔥 PARALLEL MODE COSTS:"
+            echo "  - Research Analysis: ~$0.30-$1.00"
+            echo "  - Parallel Research (3x): ~$0.90-$3.00"
+            echo "  - Integration: ~$0.50-$1.50"
+            echo "  - Quality Review: ~$0.20-$0.60"
+            echo "  - TOTAL ESTIMATED: $1.90-$6.10+"
+          else
+            echo "📊 STANDARD MODE COSTS:"
+            echo "  - Research Analysis: ~$0.30-$1.00"
+            echo "  - Integration: ~$0.50-$1.50"
+            echo "  - Quality Review: ~$0.20-$0.60"
+            echo "  - TOTAL ESTIMATED: $1.00-$3.10+"
+          fi
+          
+          echo "📈 GitHub Actions compute cost: ~$0.24 (30 min × $0.008/min)"
+          echo "🚨 Monitor actual costs in Anthropic Console billing"
+          
           # Move important artifacts to permanent locations
           if [ -f "${{ env.SESSION_DIR }}/integration-summary.md" ]; then
             cp "${{ env.SESSION_DIR }}/integration-summary.md" "03-Research-Infrastructure/Research-Reports/automated-research-$(date +%Y%m%d-%H%M).md"
@@ -135,7 +191,7 @@ jobs:
           # Clean up temporary session directory
           rm -rf "${{ env.SESSION_DIR }}"
           
-          echo "Cleanup completed for workflow run ${{ github.run_id }}"
+          echo "✅ Cleanup completed for workflow run ${{ github.run_id }}"
 
       - name: Create Pull Request (if changes made)
         uses: peter-evans/create-pull-request@v5

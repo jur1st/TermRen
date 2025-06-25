@@ -1,3 +1,9 @@
+# ⚠️ CRITICAL COST WARNING ⚠️
+# This workflow incurs costs of $0.03-$1.50+ per @claude interaction
+# USAGE REQUIRES EXPLICIT PRE-APPROVAL - See SYSTEM-INSTRUCTIONS/github-actions/workflow-approval-process.md
+# EMERGENCY SHUTDOWN: gh workflow disable claude-pr-assistant.yml
+# LOCAL ALTERNATIVE: Use local swarm mode (git worktrees) - See SYSTEM-INSTRUCTIONS/local-swarm/
+
 name: Claude PR Assistant
 
 permissions:
@@ -23,10 +29,18 @@ jobs:
     timeout-minutes: 60
     
     steps:
+      - name: ⚠️ Cost Monitoring - Log Interaction Start
+        run: |
+          echo "🚨 COST ALERT: Claude API interaction starting at $(date)"
+          echo "Expected cost: $0.03-$1.50+ plus GitHub Actions compute time"
+          echo "Workflow: claude-pr-assistant"
+          echo "Trigger: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Claude Response
+      - name: Claude Response (BILLABLE INTERACTION)
         uses: anthropics/claude-code-action@v1
         with:
           trigger_phrase: "@claude"
@@ -34,10 +48,18 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           max_turns: 10
           
-      - name: Cleanup Session
+      - name: Cost Monitoring & Cleanup Session
         if: always()
         run: |
+          # Cost tracking and cleanup
+          echo "💰 COST TRACKING: Claude interaction completed at $(date)"
+          echo "Workflow duration: Approximately $((${GITHUB_JOB_DURATION:-60} * 1)) minutes"
+          echo "Estimated API cost: $0.03-$1.50+ (varies by complexity)"
+          echo "GitHub Actions compute cost: ~$0.008 per minute"
+          
           # Remove any temporary files that might have been created
           find . -name "temp-*" -type f -delete 2>/dev/null || true
           find . -path "*/99-Archive-Session-Docs/*/temp-*" -delete 2>/dev/null || true
-          echo "Session cleanup completed"
+          
+          echo "✅ Session cleanup completed"
+          echo "📊 Monitor costs in Anthropic Console and GitHub Actions billing"

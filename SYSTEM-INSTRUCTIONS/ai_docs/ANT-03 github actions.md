@@ -4,6 +4,26 @@
 
 Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project's standards.
 
+## ⚠️ CRITICAL: Cost Control Required
+
+**ALL GitHub Actions usage requires explicit pre-approval and cost awareness.**
+
+**STOP BEFORE USING**: GitHub Actions with Claude incur significant costs ranging from $0.03 to $1.50+ per interaction, plus GitHub Actions compute costs. These costs can accumulate rapidly with multiple interactions.
+
+**MANDATORY REQUIREMENTS**:
+- **Pre-approval required**: All GitHub Actions deployments must be explicitly approved before setup
+- **Try local alternatives first**: Use local swarm mode or direct Claude Code CLI before considering GitHub Actions
+- **Reference cost control protocol**: Follow the established cost control protocol document for all AI integrations
+- **Emergency shutdown**: Immediate shutdown procedures are available if costs exceed thresholds
+
+**RECOMMENDED WORKFLOW**:
+1. Try local swarm mode for development tasks
+2. Use direct Claude Code CLI for one-off requests  
+3. Only use GitHub Actions for critical automation after cost approval
+4. Monitor usage through cost dashboards and alerts
+
+**For local alternatives, see the "Local Alternatives" section below.**
+
 <Info>
   Claude Code GitHub Actions is currently in beta. Features and functionality may evolve as we refine the experience.
 </Info>
@@ -38,11 +58,15 @@ The foundation for building custom GitHub workflows with Claude. This extensible
 
 ## Setup
 
+⚠️ **COST WARNING**: Before proceeding with setup, ensure you have explicit approval for GitHub Actions usage and have considered local alternatives.
+
 ## Quick setup
 
 The easiest way to set up this action is through Claude Code in the terminal. Just open claude and run `/install-github-app`.
 
 This command will guide you through setting up the GitHub app and required secrets.
+
+⚠️ **Cost Control**: Each setup enables automated AI interactions that incur costs. Ensure monitoring and controls are in place before activation.
 
 <Note>
   * You must be a repository admin to install the GitHub app and add secrets
@@ -50,6 +74,8 @@ This command will guide you through setting up the GitHub app and required secre
 </Note>
 
 ## Manual setup
+
+⚠️ **COST WARNING**: Manual setup still requires cost approval and monitoring. Proceed only after authorization.
 
 If the `/install-github-app` command fails or you prefer manual setup, please follow these manual setup instructions:
 
@@ -73,6 +99,8 @@ In an issue comment:
 @claude implement this feature based on the issue description
 ```
 
+⚠️ **Cost Warning**: This interaction will incur $0.03-$1.50+ in API costs plus GitHub Actions compute time.
+
 Claude will analyze the issue, write the code, and create a PR for review.
 
 ### Get implementation help
@@ -83,6 +111,8 @@ In a PR comment:
 @claude how should I implement user authentication for this endpoint?
 ```
 
+⚠️ **Cost Warning**: Each @claude mention triggers billable API usage and GitHub Actions minutes.
+
 Claude will analyze your code and provide specific implementation guidance.
 
 ### Fix bugs quickly
@@ -92,6 +122,8 @@ In an issue:
 ```yaml
 @claude fix the TypeError in the user dashboard component
 ```
+
+⚠️ **Cost Warning**: Bug fixes via @claude incur both API and compute costs. Consider local debugging first.
 
 Claude will locate the bug, implement a fix, and create a PR.
 
@@ -122,6 +154,8 @@ Use issue templates to provide context, keep your `CLAUDE.md` concise and focuse
 
 ### CI costs
 
+⚠️ **CRITICAL COST CONTROL**: All GitHub Actions usage must follow our established cost control protocol.
+
 When using Claude Code GitHub Actions, be aware of the associated costs:
 
 **GitHub Actions costs:**
@@ -132,8 +166,17 @@ When using Claude Code GitHub Actions, be aware of the associated costs:
 **API costs:**
 
 * Each Claude interaction consumes API tokens based on the length of prompts and responses
+* **Cost range**: $0.03 to $1.50+ per @claude interaction, depending on complexity
 * Token usage varies by task complexity and codebase size
 * See [Claude's pricing page](https://www.anthropic.com/api) for current token rates
+
+**MANDATORY COST CONTROLS:**
+
+* **Pre-approval required**: All GitHub Actions deployments require explicit cost approval
+* **Reference cost control protocol**: Follow the established cost control protocol document
+* **Try local alternatives first**: Use local swarm mode before GitHub Actions
+* **Emergency shutdown**: Immediate shutdown procedures available if costs exceed limits
+* **Monitoring required**: Implement cost dashboards and alerts before activation
 
 **Cost optimization tips:**
 
@@ -141,6 +184,7 @@ When using Claude Code GitHub Actions, be aware of the associated costs:
 * Configure appropriate `max_turns` limits to prevent excessive iterations
 * Set reasonable `timeout_minutes` to avoid runaway workflows
 * Consider using GitHub's concurrency controls to limit parallel runs
+* **Prefer local development**: Use local swarm mode for development tasks
 
 ## Configuration examples
 
@@ -155,6 +199,49 @@ Visit the [examples directory](https://github.com/anthropics/claude-code-action/
 <Tip>
   The examples repository includes complete, tested workflows that you can copy directly into your `.github/workflows/` directory.
 </Tip>
+
+## Local Alternatives
+
+⚠️ **RECOMMENDED FIRST**: Before using GitHub Actions, try these cost-effective local alternatives:
+
+### Local Swarm Mode
+
+**Best for development tasks and iterative work:**
+
+* **Cost**: Significantly lower than GitHub Actions
+* **Performance**: Faster feedback loops without CI/CD overhead  
+* **Use cases**: Feature development, debugging, code refactoring
+* **Setup**: Available through local Claude Code installation
+* **Benefits**: 
+  - No GitHub Actions compute costs
+  - Reduced API costs through local context
+  - Immediate feedback without workflow delays
+  - Full control over execution environment
+
+### Direct Claude Code CLI
+
+**Best for one-off requests and quick tasks:**
+
+* **Cost**: Only API costs, no additional compute charges
+* **Performance**: Immediate execution without workflow setup
+* **Use cases**: Quick code generation, documentation, single-file edits
+* **Setup**: Standard Claude Code CLI installation
+* **Benefits**:
+  - No GitHub Actions overhead
+  - Direct interaction with codebase
+  - No workflow configuration required
+  - Instant results
+
+### When to Use GitHub Actions
+
+Only consider GitHub Actions for these specific scenarios:
+
+* **Automated PR reviews**: When you need consistent, automated code review
+* **Issue-to-PR automation**: For standardized issue resolution workflows  
+* **Team collaboration**: When multiple developers need AI assistance
+* **Production deployments**: For automated testing and deployment integration
+
+**Cost-Benefit Analysis Required**: Document why local alternatives are insufficient before proceeding with GitHub Actions setup.
 
 ## Using with AWS Bedrock & Google Vertex AI
 

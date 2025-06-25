@@ -6,26 +6,65 @@
 
 ## Overview
 
-This workflow balances two goals:
+This workflow balances three goals:
 1. Capturing information needed for immediate writing tasks
 2. Preserving tangential discoveries for future research
+3. **Maintaining cost control** throughout the research process
 
-The system uses simple text files and basic bash commands - no complex code or folder structures needed.
+The system prioritizes cost-effective local tools and simple text files - no expensive automation or complex code needed.
+
+---
+
+## 🚨 Cost Control Framework
+
+### Research Processing Options (Choose Wisely)
+
+**🟢 PREFERRED: Local Claude Sessions ($0 additional cost)**
+- Standard research and writing work
+- Interactive discovery and analysis
+- Part of personal subscription - no extra charges
+
+**🟡 COST-EFFECTIVE: Local Swarm Mode ($0 additional cost)**
+- Parallel research using git worktrees
+- Multiple Claude instances for complex projects
+- No GitHub Actions or automation costs
+- Setup guide: `local-swarm/git-worktree-setup.md`
+
+**🔴 EXPENSIVE: GitHub Actions (Requires Pre-Approval)**
+- Automated research workflows: $1.50-$5.00+ per execution
+- @claude interactions: $0.03-$1.50+ each
+- **MANDATORY**: Explicit approval required before setup
+- Approval process: `github-actions/workflow-approval-process.md`
+
+### Pre-Research Cost Assessment
+Before starting any research session:
+- [ ] Budget status verified (check monthly spending)
+- [ ] Local alternatives considered first
+- [ ] If automation needed, approval obtained
+- [ ] Cost tracking method prepared
 
 ---
 
 ## Research Session Workflow
 
-### 1. Session Setup (2 minutes)
+### 1. Session Setup (2-3 minutes)
 ```bash
 # Create new research summary file
 cp RESEARCH-SUMMARY-TEMPLATE.md RESEARCH-SUMMARY-$(date +%Y%m%d).md
+
+# Add cost tracking header
+echo "## Cost Tracking - $(date)" >> RESEARCH-SUMMARY-$(date +%Y%m%d).md
+echo "Processing Mode: [Local Claude / Local Swarm / GitHub Actions]" >> RESEARCH-SUMMARY-$(date +%Y%m%d).md
+echo "Budget Status: [OK / Warning / Critical]" >> RESEARCH-SUMMARY-$(date +%Y%m%d).md
+echo "Estimated Session Cost: $0 (local) | $XX.XX (if using automation)" >> RESEARCH-SUMMARY-$(date +%Y%m%d).md
+echo "" >> RESEARCH-SUMMARY-$(date +%Y%m%d).md
 ```
 
 ### 2. Active Research Phase (30-45 minute blocks)
 - Read source materials thoroughly
 - Take notes directly in your research summary file
 - Focus on information relevant to current writing task
+- **Cost Checkpoint**: Verify still using local tools only
 - After each block: **Pause for Discovery Check**
 
 ### 3. Discovery Check Protocol (2 minutes per discovery)
@@ -33,14 +72,17 @@ Ask yourself: "What interesting things did I find that aren't directly relevant?
 
 For each tangential discovery:
 1. Rate relevance to current task (0-10 scale)
-2. If score <7, quickly note:
+2. **Rate cost impact**: Low (local research) / Medium (might need tools) / High (requires automation)
+3. If score <7, quickly note:
    - What is it?
    - Why is it interesting?
    - Which discovery file should it go in?
-3. Add to "Discoveries Logged" section of your summary
+   - Cost-effective approach for future investigation
+4. Add to "Discoveries Logged" section of your summary
 
 ### 4. Session Wrap-up (5-10 minutes)
 - Review and clean up session notes
+- **Update cost tracking**: Record actual costs vs estimates
 - Add key findings to ACCUMULATED-KNOWLEDGE.md
 - Process logged discoveries:
 
@@ -54,9 +96,53 @@ echo "" >> future-research-ideas.md
 
 ### 5. Weekly Review (Fridays, 30 minutes)
 - Review all research summaries from the week
+- **Analyze cost patterns**: Track local vs automated tool usage
 - Consolidate discoveries across sessions
+- **Evaluate cost-effectiveness**: Identify high-value, low-cost research areas
 - Update ACCUMULATED-KNOWLEDGE.md with major findings
-- Plan next week's research priorities
+- Plan next week's research priorities with cost considerations
+
+---
+
+## GitHub Actions Integration (COST CONTROLLED)
+
+### When GitHub Actions Might Be Justified
+⚠️ **Remember**: All GitHub Actions require explicit pre-approval and incur significant costs.
+
+**Potential Use Cases** (after approval):
+- Automated research triggered by external events (PRs, issues)
+- Large-scale content processing that exceeds local capacity
+- Scheduled research automation for time-sensitive topics
+- Cross-repository analysis requiring GitHub API integration
+
+### GitHub Actions Research Workflow
+If approved for GitHub Actions usage:
+
+1. **Pre-Execution Cost Verification**
+   - Confirm approval documentation exists
+   - Verify budget allocation and limits
+   - Set up cost monitoring and alerts
+   - Prepare emergency shutdown procedures
+
+2. **Execution Monitoring**
+   - Track costs in real-time during execution
+   - Monitor for scope creep or unexpected complexity
+   - Document actual vs estimated costs
+   - Maintain emergency shutdown readiness
+
+3. **Post-Execution Review**
+   - Calculate total costs (API + compute)
+   - Analyze cost-effectiveness vs local alternatives
+   - Update cost estimation models for future
+   - Document lessons learned for cost optimization
+
+### Emergency Cost Control During Automated Research
+```bash
+# Emergency shutdown commands (if costs spiral)
+gh run list --status in_progress --json databaseId --jq '.[].databaseId' | xargs -I {} gh run cancel {}
+gh workflow disable claude-research-automation.yml
+gh workflow disable claude-pr-assistant.yml
+```
 
 ---
 
@@ -154,12 +240,16 @@ Source: ASCII-History.pdf:page42
 - [ ] Sources properly noted?
 - [ ] Discoveries logged (if any)?
 - [ ] Key items added to accumulated knowledge?
+- [ ] **Cost tracking updated**: Actual vs estimated costs recorded?
+- [ ] **Local tools used**: No unauthorized automation triggered?
 
 ### Weekly Review
 - [ ] All sessions have summaries?
 - [ ] Discoveries processed and filed?
 - [ ] Accumulated knowledge updated?
 - [ ] Next week's priorities identified?
+- [ ] **Cost analysis completed**: Weekly spending vs budget reviewed?
+- [ ] **Cost-effective discoveries prioritized**: High-value, low-cost research identified?
 
 ---
 
@@ -170,6 +260,9 @@ Source: ASCII-History.pdf:page42
 3. **Under-discovering**: Don't lose interesting tangents
 4. **Complex solutions**: Use bash commands, not custom scripts
 5. **Delayed processing**: Process discoveries same day
+6. **🚨 Cost blindness**: Forgetting to track costs and tool usage
+7. **🚨 Automation temptation**: Using GitHub Actions without approval for convenience
+8. **🚨 Scope creep**: Expanding automated tasks beyond approved budgets
 
 ---
 
@@ -181,7 +274,21 @@ You're using the system well if:
 - Research builds systematically over time
 - Other team members can understand your notes
 - You spend more time researching than organizing
+- **Cost control is maintained**: Staying within budget while maximizing research value
+- **Local tools are prioritized**: Using cost-free alternatives before expensive automation
+- **Cost awareness is habitual**: Regular cost tracking without disrupting research flow
 
 ---
 
-*Remember: The goal is to support writing, not create a perfect archive. Keep it simple, keep it useful.*
+## Cost Control Resources
+
+**Essential Documentation**:
+- `api-cost-management/cost-control-protocol.md` - Complete cost control requirements
+- `api-cost-management/local-vs-remote-decision-matrix.md` - Decision framework
+- `github-actions/workflow-approval-process.md` - GitHub Actions approval process
+- `local-swarm/git-worktree-setup.md` - Cost-free parallel processing setup
+- `quick-reference/cost-control-checklist.md` - Quick cost decision reference
+
+---
+
+*Remember: The goal is to support writing efficiently and cost-effectively. Prioritize local tools, track costs consistently, and preserve discoveries systematically. Keep it simple, keep it useful, keep it affordable.*

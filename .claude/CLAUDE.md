@@ -20,33 +20,76 @@ Terminal Renaissance is a 60+ year digital archaeology project exploring how tec
 
 ## GitHub Integration & Swarm-Based Workflows
 
-### Setting Up GitHub Actions
-When implementing GitHub workflows:
-1. Use the `/install-github-app` command to configure GitHub integration
-2. Create workflows in `.github/workflows/` for automated tasks
-3. Leverage the Claude Code Action for parallel processing
+### 🚨 CRITICAL: Cost Control for GitHub Actions
 
-### Parallel Claude Instance Management
+**ALL GitHub Actions usage requires explicit pre-approval - NO EXCEPTIONS**
+
+**STOP BEFORE USING**: GitHub Actions with Claude cost $0.03-$1.50+ per interaction plus compute costs. These costs accumulate rapidly.
+
+**MANDATORY REQUIREMENTS**:
+- **Pre-approval required**: All GitHub Actions deployments need explicit written approval
+- **Try local alternatives FIRST**: Use local swarm mode (git worktrees) before considering GitHub Actions
+- **Follow cost control protocol**: Reference `SYSTEM-INSTRUCTIONS/api-cost-management/cost-control-protocol.md`
+- **Emergency shutdown ready**: Have immediate shutdown procedures available
+
+### Setting Up GitHub Actions (ONLY AFTER APPROVAL)
+When implementing GitHub workflows **AFTER GETTING APPROVAL**:
+1. ⚠️ **COST WARNING**: Ensure explicit approval obtained and documented
+2. Use the `/install-github-app` command to configure GitHub integration  
+3. Create workflows in `.github/workflows/` with cost monitoring safeguards
+4. Leverage the Claude Code Action for parallel processing (monitor costs closely)
+
+### Parallel Claude Instance Management (LOCAL SWARM MODE - $0 COST)
+
+**PREFERRED METHOD**: Use local git worktrees for parallel processing - completely cost-free alternative to GitHub Actions.
+
 For complex tasks requiring parallelization:
 
 ```bash
-# Create git worktrees for isolated parallel work
+# Create git worktrees for isolated parallel work (RECOMMENDED - NO COST)
 git worktree add ../terminal-renaissance-feature-a feature-a
 git worktree add ../terminal-renaissance-research-b research-b
 git worktree add ../terminal-renaissance-docs-c docs-c
 
-# Launch Claude instances in separate terminals
+# Launch Claude instances in separate terminals (NO ADDITIONAL API COSTS)
 # Terminal 1: cd ../terminal-renaissance-feature-a && claude
 # Terminal 2: cd ../terminal-renaissance-research-b && claude
 # Terminal 3: cd ../terminal-renaissance-docs-c && claude
 ```
 
-### Headless Mode for Automation
-For CI/CD and automated workflows:
+**Benefits of Local Swarm Mode**:
+- 🆓 **Zero additional cost** - No GitHub Actions or extra API charges
+- ⚡ **Faster setup** - 2-5 minutes vs 15+ minutes for GitHub Actions approval
+- 🎯 **Full control** - Direct interaction with each Claude instance
+- 📊 **Complete context** - Each instance has full repository access
+
+**Setup Guide**: See `SYSTEM-INSTRUCTIONS/local-swarm/git-worktree-setup.md` for detailed instructions.
+
+### Headless Mode for Automation (COST AWARENESS REQUIRED)
+
+⚠️ **COST WARNING**: Headless mode still consumes API credits. Monitor usage carefully.
+
+For CI/CD and automated workflows (use sparingly):
 ```bash
+# Monitor API usage when using headless mode
 claude -p "analyze all research reports and create a summary" --output-format json
 claude -p "run quality checks on all chapters" --allowedTools Read Grep
 ```
+
+**Cost Control for Headless Mode**:
+- Prefer local interactive sessions for development work
+- Use headless mode only for specific automation needs  
+- Track API usage when running batch operations
+- Consider local alternatives before automating
+
+### Cost Control Documentation References
+
+**Essential Reading**:
+- `SYSTEM-INSTRUCTIONS/api-cost-management/cost-control-protocol.md` - Complete cost control requirements
+- `SYSTEM-INSTRUCTIONS/api-cost-management/local-vs-remote-decision-matrix.md` - When to use local vs GitHub Actions
+- `SYSTEM-INSTRUCTIONS/github-actions/workflow-approval-process.md` - Step-by-step approval process
+- `SYSTEM-INSTRUCTIONS/safety/api-usage-safeguards.md` - Emergency procedures and monitoring
+- `SYSTEM-INSTRUCTIONS/local-swarm/git-worktree-setup.md` - Local parallel processing setup
 
 ## MANDATORY: Temporary Work Management
 
