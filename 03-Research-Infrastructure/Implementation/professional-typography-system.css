@@ -1,0 +1,340 @@
+/* ============================================
+   PROFESSIONAL TYPOGRAPHY SYSTEM
+   Foundation for Terminal Renaissance Obsidian Themes
+   Luminary-Grade Quality for Computing History Documentation
+   ============================================ */
+
+/* Adobe Fonts Integration with Professional Fallbacks
+   Researched implementation patterns for reliability */
+@import url('https://use.typekit.net/afz6rqj.css');
+
+/* Preload Critical Adobe Fonts for Performance */
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('https://use.typekit.net/afz6rqj.css') format('woff2');
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('https://use.typekit.net/afz6rqj.css') format('woff2');
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal italic;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url('https://use.typekit.net/afz6rqj.css') format('woff2');
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal italic;
+}
+
+:root {
+  /* ============================================
+     TIER 1: ADOBE FONTS (PROFESSIONAL QUALITY)
+     ============================================ */
+  
+  /* Engineering/Technical Documentation Fonts */
+  --font-engineering-mono: 'Source Code Pro', ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+  --font-engineering-sans: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-engineering-serif: 'Minion Pro', 'Times New Roman', Times, serif;
+  
+  /* Historical Computing Fonts */
+  --font-ibm-technical: 'Source Sans Pro', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-ibm-mono: 'Source Code Pro', 'IBM Plex Mono', ui-monospace, 'SF Mono', Monaco, Consolas, monospace;
+  
+  /* ============================================
+     TIER 2: HOMEBREW FONTS (ENHANCED QUALITY)
+     ============================================ */
+  
+  /* Premium Developer Fonts (via Homebrew) */
+  --font-homebrew-mono: 'JetBrains Mono', 'Fira Code', 'Hack', 'Inconsolata', ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-homebrew-sans: 'Inter', 'Public Sans', 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-homebrew-serif: 'Crimson Text', 'Libre Baskerville', 'Source Serif Pro', Georgia, Times, serif;
+  
+  /* Terminal/Retro Computing Fonts */
+  --font-terminal-authentic: 'Berkeley Mono', 'Departure Mono', 'Terminus', 'PragmataPro', ui-monospace, 'SF Mono', monospace;
+  --font-pixel-perfect: 'Terminus', 'Proggy', 'Spleen', 'Tamzen', ui-monospace, Monaco, 'Courier New', monospace;
+  
+  /* ============================================
+     TIER 3: GOOGLE FONTS (RELIABLE FALLBACK)
+     ============================================ */
+  
+  /* Google Fonts as Tertiary Fallback */
+  --font-google-mono: 'Roboto Mono', 'Ubuntu Mono', 'Noto Sans Mono', ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-google-sans: 'Open Sans', 'Roboto', 'Lato', 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-google-serif: 'Merriweather', 'Playfair Display', 'Crimson Text', Georgia, Times, serif;
+  
+  /* ============================================
+     TIER 4: MACOS SEQUOIA SYSTEM FONTS (FINAL FALLBACK)
+     ============================================ */
+  
+  /* macOS Sequoia System Fonts (2024) */
+  --font-system-mono: ui-monospace, 'SF Mono', Monaco, 'Menlo', 'Consolas', 'DejaVu Sans Mono', monospace;
+  --font-system-sans: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-system-serif: 'Times New Roman', Times, 'Georgia', serif;
+  
+  /* ============================================
+     FONT WEIGHT SYSTEM (VARIABLE FONT SUPPORT)
+     ============================================ */
+  
+  --weight-thin: 100;
+  --weight-extralight: 200;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --weight-black: 900;
+  
+  /* ============================================
+     THEMATIC FONT COMBINATIONS
+     ============================================ */
+  
+  /* Engineering Documentation Theme */
+  --theme-engineering-body: var(--font-engineering-sans);
+  --theme-engineering-headers: var(--font-engineering-sans);
+  --theme-engineering-code: var(--font-engineering-mono);
+  --theme-engineering-accent: var(--font-engineering-serif);
+  
+  /* Technical Documentation Theme */
+  --theme-technical-body: var(--font-ibm-technical);
+  --theme-technical-headers: var(--font-ibm-technical);
+  --theme-technical-code: var(--font-ibm-mono);
+  --theme-technical-accent: var(--font-engineering-serif);
+  
+  /* Terminal/Computing Theme */
+  --theme-terminal-body: var(--font-terminal-authentic);
+  --theme-terminal-headers: var(--font-terminal-authentic);
+  --theme-terminal-code: var(--font-pixel-perfect);
+  --theme-terminal-accent: var(--font-terminal-authentic);
+  
+  /* ============================================
+     FILM-INSPIRED FONT COMBINATIONS
+     ============================================ */
+  
+  /* Tron (1982) - Geometric Digital */
+  --theme-tron-body: var(--font-engineering-sans);
+  --theme-tron-headers: var(--font-engineering-sans);
+  --theme-tron-code: var(--font-engineering-mono);
+  --theme-tron-accent: var(--font-engineering-sans);
+  
+  /* Sneakers (1992) - Authentic Terminal */
+  --theme-sneakers-body: var(--font-homebrew-mono);
+  --theme-sneakers-headers: var(--font-homebrew-sans);
+  --theme-sneakers-code: var(--font-terminal-authentic);
+  --theme-sneakers-accent: var(--font-homebrew-sans);
+  
+  /* Hackers (1995) - Cyberpunk Typography */
+  --theme-hackers-body: var(--font-google-sans);
+  --theme-hackers-headers: var(--font-google-sans);
+  --theme-hackers-code: var(--font-google-mono);
+  --theme-hackers-accent: var(--font-google-sans);
+  
+  /* Severance - Corporate Precision */
+  --theme-severance-body: var(--font-engineering-sans);
+  --theme-severance-headers: var(--font-engineering-sans);
+  --theme-severance-code: var(--font-engineering-mono);
+  --theme-severance-accent: var(--font-engineering-serif);
+  
+  /* ============================================
+     FONT SIZE SCALES (MODULAR SCALE)
+     ============================================ */
+  
+  /* Perfect Fourth Scale (1.333) - Mathematical Harmony */
+  --scale-ratio: 1.333;
+  --font-size-base: 16px;
+  
+  /* Font Size Scale */
+  --font-size-xs: calc(var(--font-size-base) / var(--scale-ratio) / var(--scale-ratio));    /* ~9px */
+  --font-size-sm: calc(var(--font-size-base) / var(--scale-ratio));                        /* ~12px */
+  --font-size-md: var(--font-size-base);                                                   /* 16px */
+  --font-size-lg: calc(var(--font-size-base) * var(--scale-ratio));                       /* ~21px */
+  --font-size-xl: calc(var(--font-size-base) * var(--scale-ratio) * var(--scale-ratio));  /* ~28px */
+  --font-size-2xl: calc(var(--font-size-xl) * var(--scale-ratio));                        /* ~37px */
+  --font-size-3xl: calc(var(--font-size-2xl) * var(--scale-ratio));                       /* ~49px */
+  
+  /* Line Height System */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter Spacing System */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  
+  /* ============================================
+     PANDOC WORD CONVERSION SUPPORT
+     ============================================ */
+  
+  /* Font metrics for consistent layout across formats */
+  --font-cap-height-ratio: 0.7;          /* For consistent vertical rhythm */
+  --font-x-height-ratio: 0.5;            /* For baseline alignment */
+  --font-line-gap-ratio: 0.2;            /* For proper line spacing */
+  
+  /* Font feature settings for professional typography */
+  --font-features-professional: 'kern' 1, 'liga' 1, 'clig' 1, 'calt' 1;
+  --font-features-tabular: 'kern' 1, 'liga' 0, 'tnum' 1, 'lnum' 1;
+  --font-features-small-caps: 'kern' 1, 'liga' 1, 'smcp' 1;
+  
+  /* ============================================
+     ACCESSIBILITY COMPLIANCE
+     ============================================ */
+  
+  /* WCAG 2.1 AA Minimum Font Sizes */
+  --font-size-min-body: 16px;             /* Never smaller for body text */
+  --font-size-min-ui: 14px;               /* Minimum for interface elements */
+  --font-size-min-caption: 12px;          /* Minimum for captions/labels */
+  
+  /* High Contrast Mode Support */
+  --font-weight-accessible: var(--weight-medium);  /* Stronger weights for accessibility */
+  --line-height-accessible: 1.6;                   /* More generous line height */
+  
+  /* ============================================
+     OPTIMIZATION SETTINGS
+     ============================================ */
+  
+  /* Font Loading Optimization */
+  --font-display-strategy: swap;          /* Immediate text display with font swap */
+  --font-loading-timeout: 3s;             /* Fallback after 3 seconds */
+  
+  /* Rendering Optimization */
+  --font-smoothing: antialiased;
+  --text-rendering: optimizeLegibility;
+  --font-variant-numeric: tabular-nums;   /* Consistent number spacing */
+  
+  /* ============================================
+     PRINT MEDIA SUPPORT
+     ============================================ */
+  
+  /* Print-specific font adjustments */
+  --font-size-print-adjustment: 0.9;      /* Slightly smaller for print */
+  --line-height-print: 1.4;               /* Tighter line height for print */
+  --letter-spacing-print: 0.01em;         /* Slight increase for print clarity */
+}
+
+/* ============================================
+   UTILITY CLASSES FOR TYPOGRAPHY
+   ============================================ */
+
+/* Font Family Utilities */
+.font-engineering { font-family: var(--theme-engineering-body); }
+.font-technical { font-family: var(--theme-technical-body); }
+.font-terminal { font-family: var(--theme-terminal-body); }
+.font-tron { font-family: var(--theme-tron-body); }
+.font-sneakers { font-family: var(--theme-sneakers-body); }
+.font-hackers { font-family: var(--theme-hackers-body); }
+.font-severance { font-family: var(--theme-severance-body); }
+
+/* Font Weight Utilities */
+.font-thin { font-weight: var(--weight-thin); }
+.font-light { font-weight: var(--weight-light); }
+.font-regular { font-weight: var(--weight-regular); }
+.font-medium { font-weight: var(--weight-medium); }
+.font-semibold { font-weight: var(--weight-semibold); }
+.font-bold { font-weight: var(--weight-bold); }
+.font-black { font-weight: var(--weight-black); }
+
+/* Font Size Utilities */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+
+/* Professional Typography Features */
+.text-professional {
+  font-feature-settings: var(--font-features-professional);
+  text-rendering: var(--text-rendering);
+  -webkit-font-smoothing: var(--font-smoothing);
+}
+
+.text-tabular {
+  font-feature-settings: var(--font-features-tabular);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-small-caps {
+  font-feature-settings: var(--font-features-small-caps);
+}
+
+/* ============================================
+   PRINT MEDIA OPTIMIZATIONS
+   ============================================ */
+
+@media print {
+  :root {
+    /* Adjust font sizes for print */
+    --font-size-base: calc(16px * var(--font-size-print-adjustment));
+  }
+  
+  /* Ensure proper font fallbacks for print */
+  * {
+    font-family: var(--font-system-serif) !important;
+    line-height: var(--line-height-print) !important;
+    letter-spacing: var(--letter-spacing-print) !important;
+  }
+  
+  /* Code blocks use monospace in print */
+  code, pre, .code {
+    font-family: var(--font-system-mono) !important;
+  }
+}
+
+/* ============================================
+   SCREEN READER ACCESSIBILITY
+   ============================================ */
+
+@media screen and (prefers-reduced-motion: reduce) {
+  * {
+    /* Disable font animations for users who prefer reduced motion */
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media screen and (prefers-contrast: high) {
+  :root {
+    /* Use stronger font weights for high contrast preference */
+    --weight-regular: var(--weight-medium);
+    --weight-medium: var(--weight-semibold);
+    --weight-semibold: var(--weight-bold);
+  }
+}
+
+/* ============================================
+   DEBUGGING AND DEVELOPMENT UTILITIES
+   ============================================ */
+
+/* Typography debugging (remove in production) */
+.debug-typography {
+  outline: 1px solid red;
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.debug-typography::before {
+  content: attr(class);
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 10px;
+  background: red;
+  color: white;
+  padding: 2px 4px;
+  z-index: 1000;
+}
+
+/* End Typography System */
