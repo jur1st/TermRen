@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheDraw 4.63 Recreation - Terminal Renaissance</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #c0c0c0;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        .thedraw-interface {
+            display: flex;
+            height: 100vh;
+            background: #000080;
+        }
+
+        .toolbar {
+            width: 160px;
+            background: #008080;
+            border-right: 2px outset #c0c0c0;
+            padding: 8px;
+            overflow-y: auto;
+        }
+
+        .tool-section {
+            margin-bottom: 12px;
+            border: 1px inset #c0c0c0;
+            padding: 4px;
+        }
+
+        .tool-title {
+            color: #ffff00;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .tool-button {
+            display: block;
+            width: 100%;
+            margin: 2px 0;
+            padding: 2px 4px;
+            background: #c0c0c0;
+            color: #000;
+            border: 1px outset #c0c0c0;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .tool-button:hover {
+            background: #ffff00;
+        }
+
+        .tool-button.active {
+            background: #ff0000;
+            color: #fff;
+            border: 1px inset #c0c0c0;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 4px;
+        }
+
+        .color-swatch {
+            width: 20px;
+            height: 16px;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        .color-swatch.selected {
+            border: 2px solid #ffff00;
+        }
+
+        .canvas-area {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow: auto;
+        }
+
+        .ansi-canvas {
+            background: #000;
+            font-family: 'IBM VGA', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0;
+            white-space: pre;
+            margin: 8px;
+            border: 1px solid #c0c0c0;
+            cursor: text;
+            user-select: none;
+        }
+
+        .canvas-cell {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            position: relative;
+        }
+
+        .status-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 24px;
+            background: #008080;
+            border-top: 1px solid #c0c0c0;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .character-set {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: 1px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #000;
+            border: 1px inset #c0c0c0;
+        }
+
+        .char-cell {
+            width: 16px;
+            height: 16px;
+            background: #000;
+            color: #c0c0c0;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+
+        .char-cell:hover {
+            background: #333;
+            border: 1px solid #fff;
+        }
+
+        .char-cell.selected {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .menu-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: #c0c0c0;
+            border-bottom: 1px solid #808080;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #000;
+            z-index: 100;
+        }
+
+        .menu-item {
+            padding: 2px 8px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: #0000ff;
+            color: #fff;
+        }
+
+        /* CGA Color Palette */
+        .color-0 { background-color: #000000; } /* Black */
+        .color-1 { background-color: #0000aa; } /* Blue */
+        .color-2 { background-color: #00aa00; } /* Green */
+        .color-3 { background-color: #00aaaa; } /* Cyan */
+        .color-4 { background-color: #aa0000; } /* Red */
+        .color-5 { background-color: #aa00aa; } /* Magenta */
+        .color-6 { background-color: #aa5500; } /* Brown */
+        .color-7 { background-color: #aaaaaa; } /* Light Gray */
+        .color-8 { background-color: #555555; } /* Dark Gray */
+        .color-9 { background-color: #5555ff; } /* Light Blue */
+        .color-10 { background-color: #55ff55; } /* Light Green */
+        .color-11 { background-color: #55ffff; } /* Light Cyan */
+        .color-12 { background-color: #ff5555; } /* Light Red */
+        .color-13 { background-color: #ff55ff; } /* Light Magenta */
+        .color-14 { background-color: #ffff55; } /* Yellow */
+        .color-15 { background-color: #ffffff; } /* White */
+
+        .info-panel {
+            position: absolute;
+            top: 24px;
+            right: 8px;
+            width: 300px;
+            background: rgba(192, 192, 192, 0.95);
+            border: 2px outset #c0c0c0;
+            padding: 12px;
+            color: #000;
+            font-size: 11px;
+            z-index: 50;
+        }
+
+        .info-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000080;
+        }
+    </style>
+</head>
+<body>
+    <div class="thedraw-interface">
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Tools</div>
+            <div class="menu-item">Help</div>
+        </div>
+
+        <div class="toolbar">
+            <div class="tool-section">
+                <div class="tool-title">Drawing Tools</div>
+                <button class="tool-button active" data-tool="freehand">Freehand</button>
+                <button class="tool-button" data-tool="line">Line</button>
+                <button class="tool-button" data-tool="box">Box</button>
+                <button class="tool-button" data-tool="fill">Fill</button>
+                <button class="tool-button" data-tool="text">Text</button>
+            </div>
+
+            <div class="tool-section">
+                <div class="tool-title">Colors</div>
+                <div class="color-palette" id="colorPalette">
+                    <!-- CGA 16-color palette will be generated here -->
+                </div>
+                <div style="margin-top: 8px; font-size: 10px;">
+                    FG: <span id="fgColor">7</span> BG: <span id="bgColor">0</span>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <div class="tool-title">Character Set</div>
+                <div class="character-set" id="characterSet">
+                    <!-- IBM Code Page 437 characters -->
+                </div>
+                <div style="margin-top: 4px; font-size: 10px;">
+                    Char: <span id="currentChar">219</span>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <div class="tool-title">Actions</div>
+                <button class="tool-button" onclick="clearCanvas()">Clear</button>
+                <button class="tool-button" onclick="exportANSI()">Export</button>
+                <button class="tool-button" onclick="showInfo()">Info</button>
+            </div>
+        </div>
+
+        <div class="canvas-area">
+            <div class="ansi-canvas" id="ansiCanvas"></div>
+        </div>
+
+        <div class="status-bar">
+            <span>TheDraw 4.63 Recreation - Terminal Renaissance Project</span>
+            <span style="margin-left: auto;">Pos: <span id="cursorPos">1,1</span> | Size: 80x25</span>
+        </div>
+    </div>
+
+    <div class="info-panel" id="infoPanel" style="display: none;">
+        <div class="info-title">TheDraw 4.63 Historical Recreation</div>
+        <p><strong>Original Release:</strong> 1993 by Ian E. Davis</p>
+        <p><strong>Historical Significance:</strong> The most influential ANSI art editor, enabling non-programmers to create sophisticated text-mode graphics.</p>
+        <p><strong>Technical Innovation:</strong> First popular editor to combine ASCII and extended ASCII characters with color attributes for artistic creation.</p>
+        <p><strong>Cultural Impact:</strong> Enabled the BBS art scene and influenced generations of text-based artistic expression.</p>
+        <p><strong>This Recreation:</strong> Demonstrates core functionality using modern web technologies while preserving the original interface design and workflow.</p>
+        <button onclick="hideInfo()" style="margin-top: 8px;">Close</button>
+    </div>
+
+    <script>
+        // Global state
+        let currentTool = 'freehand';
+        let currentFgColor = 7;
+        let currentBgColor = 0;
+        let currentChar = 219; // Block character
+        let canvasWidth = 80;
+        let canvasHeight = 25;
+        let canvas = [];
+        let isDrawing = false;
+
+        // Initialize canvas data structure
+        function initCanvas() {
+            canvas = [];
+            for (let y = 0; y < canvasHeight; y++) {
+                canvas[y] = [];
+                for (let x = 0; x < canvasWidth; x++) {
+                    canvas[y][x] = {
+                        char: 32, // Space
+                        fg: 7,    // Light gray
+                        bg: 0     // Black
+                    };
+                }
+            }
+        }
+
+        // Create color palette
+        function createColorPalette() {
+            const palette = document.getElementById('colorPalette');
+            const colors = [
+                '#000000', '#0000aa', '#00aa00', '#00aaaa',
+                '#aa0000', '#aa00aa', '#aa5500', '#aaaaaa',
+                '#555555', '#5555ff', '#55ff55', '#55ffff',
+                '#ff5555', '#ff55ff', '#ffff55', '#ffffff'
+            ];
+
+            colors.forEach((color, index) => {
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch';
+                swatch.style.backgroundColor = color;
+                swatch.dataset.color = index;
+                swatch.addEventListener('click', (e) => {
+                    if (e.ctrlKey) {
+                        currentBgColor = index;
+                        document.getElementById('bgColor').textContent = index;
+                    } else {
+                        currentFgColor = index;
+                        document.getElementById('fgColor').textContent = index;
+                    }
+                    updateColorSelection();
+                });
+                palette.appendChild(swatch);
+            });
+            updateColorSelection();
+        }
+
+        // Create character set (IBM Code Page 437)
+        function createCharacterSet() {
+            const charSet = document.getElementById('characterSet');
+            
+            // Common ANSI art characters from CP437
+            const chars = [
+                32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+                48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
+                64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+                80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
+                96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127,
+                176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
+                192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207,
+                208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223,
+                224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239,
+                240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255
+            ];
+
+            chars.forEach(charCode => {
+                const cell = document.createElement('div');
+                cell.className = 'char-cell';
+                cell.dataset.char = charCode;
+                cell.textContent = String.fromCharCode(charCode);
+                cell.addEventListener('click', () => {
+                    currentChar = charCode;
+                    document.getElementById('currentChar').textContent = charCode;
+                    updateCharSelection();
+                });
+                charSet.appendChild(cell);
+            });
+            updateCharSelection();
+        }
+
+        // Update visual selection indicators
+        function updateColorSelection() {
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.remove('selected');
+            });
+            document.querySelector(`[data-color="${currentFgColor}"]`).classList.add('selected');
+        }
+
+        function updateCharSelection() {
+            document.querySelectorAll('.char-cell').forEach(cell => {
+                cell.classList.remove('selected');
+            });
+            document.querySelector(`[data-char="${currentChar}"]`).classList.add('selected');
+        }
+
+        // Tool selection
+        document.querySelectorAll('.tool-button[data-tool]').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tool-button').forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                currentTool = button.dataset.tool;
+            });
+        });
+
+        // Render canvas
+        function renderCanvas() {
+            const canvasEl = document.getElementById('ansiCanvas');
+            canvasEl.innerHTML = '';
+            
+            for (let y = 0; y < canvasHeight; y++) {
+                for (let x = 0; x < canvasWidth; x++) {
+                    const cell = canvas[y][x];
+                    const span = document.createElement('span');
+                    span.style.color = getColorHex(cell.fg);
+                    span.style.backgroundColor = getColorHex(cell.bg);
+                    span.textContent = String.fromCharCode(cell.char);
+                    span.dataset.x = x;
+                    span.dataset.y = y;
+                    
+                    // Add mouse event listeners
+                    span.addEventListener('mousedown', handleMouseDown);
+                    span.addEventListener('mouseover', handleMouseOver);
+                    span.addEventListener('mouseup', handleMouseUp);
+                    
+                    canvasEl.appendChild(span);
+                }
+                canvasEl.appendChild(document.createElement('br'));
+            }
+        }
+
+        // Get hex color from palette index
+        function getColorHex(index) {
+            const colors = [
+                '#000000', '#0000aa', '#00aa00', '#00aaaa',
+                '#aa0000', '#aa00aa', '#aa5500', '#aaaaaa',
+                '#555555', '#5555ff', '#55ff55', '#55ffff',
+                '#ff5555', '#ff55ff', '#ffff55', '#ffffff'
+            ];
+            return colors[index] || '#aaaaaa';
+        }
+
+        // Mouse event handlers
+        function handleMouseDown(e) {
+            isDrawing = true;
+            const x = parseInt(e.target.dataset.x);
+            const y = parseInt(e.target.dataset.y);
+            drawAt(x, y);
+        }
+
+        function handleMouseOver(e) {
+            const x = parseInt(e.target.dataset.x);
+            const y = parseInt(e.target.dataset.y);
+            document.getElementById('cursorPos').textContent = `${x+1},${y+1}`;
+            
+            if (isDrawing && currentTool === 'freehand') {
+                drawAt(x, y);
+            }
+        }
+
+        function handleMouseUp() {
+            isDrawing = false;
+        }
+
+        // Drawing function
+        function drawAt(x, y) {
+            if (x >= 0 && x < canvasWidth && y >= 0 && y < canvasHeight) {
+                canvas[y][x] = {
+                    char: currentChar,
+                    fg: currentFgColor,
+                    bg: currentBgColor
+                };
+                renderCanvas();
+            }
+        }
+
+        // Utility functions
+        function clearCanvas() {
+            initCanvas();
+            renderCanvas();
+        }
+
+        function exportANSI() {
+            // Simple ANSI export (actual TheDraw had sophisticated format)
+            let ansi = '';
+            for (let y = 0; y < canvasHeight; y++) {
+                for (let x = 0; x < canvasWidth; x++) {
+                    const cell = canvas[y][x];
+                    if (cell.char !== 32 || cell.bg !== 0) {
+                        ansi += `\x1b[${cell.fg + 30};${cell.bg + 40}m${String.fromCharCode(cell.char)}`;
+                    } else {
+                        ansi += ' ';
+                    }
+                }
+                ansi += '\n';
+            }
+            
+            const blob = new Blob([ansi], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ansi-art.ans';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showInfo() {
+            document.getElementById('infoPanel').style.display = 'block';
+        }
+
+        function hideInfo() {
+            document.getElementById('infoPanel').style.display = 'none';
+        }
+
+        // Initialize everything
+        initCanvas();
+        createColorPalette();
+        createCharacterSet();
+        renderCanvas();
+
+        // Prevent context menu on canvas
+        document.getElementById('ansiCanvas').addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+name: Claude Research Automation
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  workflow_dispatch:
+    inputs:
+      research_task:
+        description: 'Research task to perform'
+        required: true
+        type: string
+      parallel_mode:
+        description: 'Enable parallel processing'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  claude-research:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude')) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for research context
+
+      - name: Setup Claude workspace
+        run: |
+          # Create session directory for this workflow run
+          mkdir -p "99-Archive-Session-Docs/$(date +%Y-%m-%d)-workflow-${{ github.run_id }}"
+          echo "SESSION_DIR=99-Archive-Session-Docs/$(date +%Y-%m-%d)-workflow-${{ github.run_id }}" >> $GITHUB_ENV
+
+      - name: Research Task Analysis
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Analyze the research task and create a comprehensive plan following Terminal Renaissance methodology.
+            
+            Task: ${{ github.event.inputs.research_task || 'Process GitHub issue/comment request' }}
+            
+            Requirements:
+            1. Follow the project's constraint-based creativity theme
+            2. Maintain Feynman voice standards
+            3. Update relevant sections in the knowledge graph
+            4. Document findings in research reports
+            5. Clean up temporary files when done
+            
+            Create a plan in ${{ env.SESSION_DIR }}/research-plan.md
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: 10
+
+      - name: Parallel Research (if enabled)
+        if: github.event.inputs.parallel_mode == 'true'
+        strategy:
+          matrix:
+            research_focus: [technical, cultural, chronological]
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Focus on ${{ matrix.research_focus }} aspects of the research task.
+            
+            Research Focus: ${{ matrix.research_focus }}
+            - technical: Character encoding, hardware constraints, technical implementations
+            - cultural: BBS culture, community formation, artistic movements
+            - chronological: Timeline accuracy, historical context, period details
+            
+            Document findings in ${{ env.SESSION_DIR }}/${{ matrix.research_focus }}-findings.md
+            
+            Follow Terminal Renaissance standards:
+            - Maintain chronological accuracy using Master-Timeline.md
+            - Reference existing knowledge graph concepts
+            - Identify new connections and patterns
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: 15
+
+      - name: Integrate Research Findings
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Integrate all research findings and update project documentation.
+            
+            Tasks:
+            1. Review findings in ${{ env.SESSION_DIR }}/
+            2. Update relevant files in 03-Research-Infrastructure/
+            3. Add new concepts to 02-Knowledge-Graph/ if appropriate
+            4. Update ACCUMULATED-KNOWLEDGE.md with new insights
+            5. Create summary in ${{ env.SESSION_DIR }}/integration-summary.md
+            
+            Maintain Terminal Renaissance quality standards throughout.
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: 20
+
+      - name: Quality Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Perform final quality review of all changes.
+            
+            Review criteria:
+            1. Feynman voice consistency
+            2. Constraint-based creativity theme maintenance
+            3. Chronological accuracy
+            4. Knowledge graph coherence
+            5. Research methodology compliance
+            
+            Document review results in ${{ env.SESSION_DIR }}/quality-review.md
+            List any issues that need human attention.
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: 10
+
+      - name: Cleanup Temporary Files
+        run: |
+          # Move important artifacts to permanent locations
+          if [ -f "${{ env.SESSION_DIR }}/integration-summary.md" ]; then
+            cp "${{ env.SESSION_DIR }}/integration-summary.md" "03-Research-Infrastructure/Research-Reports/automated-research-$(date +%Y%m%d-%H%M).md"
+          fi
+          
+          # Clean up temporary session directory
+          rm -rf "${{ env.SESSION_DIR }}"
+          
+          echo "Cleanup completed for workflow run ${{ github.run_id }}"
+
+      - name: Create Pull Request (if changes made)
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            Research automation: ${{ github.event.inputs.research_task || 'Process GitHub request' }}
+            
+            🤖 Generated with Claude Code GitHub Action
+            
+            Co-Authored-By: Claude <noreply@anthropic.com>
+          title: "Research: ${{ github.event.inputs.research_task || 'Automated research update' }}"
+          body: |
+            ## Research Summary
+            
+            Automated research task completed following Terminal Renaissance methodology.
+            
+            ### Changes Made
+            - Updated research infrastructure
+            - Enhanced knowledge graph connections
+            - Maintained project quality standards
+            
+            ### Review Notes
+            Please review for:
+            - Feynman voice consistency
+            - Historical accuracy
+            - Constraint-based creativity theme
+            
+            🤖 Generated with [Claude Code](https://claude.ai/code)
+          branch: research/automated-${{ github.run_id }}
+          delete-branch: true

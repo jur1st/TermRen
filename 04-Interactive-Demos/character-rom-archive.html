@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Character ROM Archive - Terminal Renaissance</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .archive-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #00ff00;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            color: #aaa;
+            margin: 10px 0 0 0;
+            font-size: 14px;
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-input {
+            background: #2a2a2a;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .filter-select {
+            background: #2a2a2a;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .rom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .rom-card {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .rom-card:hover {
+            border-color: #00ff00;
+        }
+
+        .rom-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .rom-name {
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .rom-year {
+            color: #ffff00;
+            font-size: 12px;
+        }
+
+        .rom-specs {
+            margin-bottom: 15px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .spec-label {
+            color: #aaa;
+        }
+
+        .spec-value {
+            color: #fff;
+        }
+
+        .character-grid {
+            background: #000;
+            border: 1px solid #333;
+            padding: 8px;
+            font-size: 10px;
+            line-height: 1;
+            font-family: monospace;
+            overflow: hidden;
+            height: 120px;
+        }
+
+        .character-sample {
+            color: #00ff00;
+            letter-spacing: 0;
+            word-spacing: 0;
+        }
+
+        .cultural-impact {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.3;
+        }
+
+        .regional-variants {
+            margin-top: 20px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .variants-title {
+            color: #ffff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .variant-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .variant-item {
+            background: #2a2a2a;
+            padding: 8px;
+            border-radius: 2px;
+            font-size: 11px;
+        }
+
+        .variant-name {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .variant-desc {
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        .preservation-status {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .status-preserved {
+            background: #004400;
+            color: #00ff00;
+        }
+
+        .status-partial {
+            background: #444400;
+            color: #ffff00;
+        }
+
+        .status-at-risk {
+            background: #440000;
+            color: #ff4444;
+        }
+
+        .detailed-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            overflow: auto;
+        }
+
+        .detailed-content {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 4px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #ff4444;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .full-character-set {
+            background: #000;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.2;
+            color: #00ff00;
+            overflow-x: auto;
+        }
+
+        .stats-panel {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stats-title {
+            color: #ffff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            color: #00ff00;
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="archive-container">
+        <div class="header">
+            <h1>Interactive Character ROM Archive</h1>
+            <p>Preserving the Typography That Defined Computing History</p>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stats-title">Archive Statistics</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalROMs">18</span>
+                    <span class="stat-label">ROM Variants</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="preservedROMs">12</span>
+                    <span class="stat-label">Fully Preserved</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="atRiskROMs">6</span>
+                    <span class="stat-label">At Risk</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="regionalVariants">34</span>
+                    <span class="stat-label">Regional Variants</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-controls">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search ROM chips, manufacturers, or features...">
+            <select class="filter-select" id="yearFilter">
+                <option value="">All Years</option>
+                <option value="1970s">1970s</option>
+                <option value="1980s">1980s</option>
+                <option value="1990s">1990s</option>
+            </select>
+            <select class="filter-select" id="statusFilter">
+                <option value="">All Status</option>
+                <option value="preserved">Fully Preserved</option>
+                <option value="partial">Partially Preserved</option>
+                <option value="at-risk">At Risk</option>
+            </select>
+            <select class="filter-select" id="manufacturerFilter">
+                <option value="">All Manufacturers</option>
+                <option value="signetics">Signetics</option>
+                <option value="intel">Intel</option>
+                <option value="motorola">Motorola</option>
+                <option value="dec">DEC</option>
+                <option value="ibm">IBM</option>
+            </select>
+        </div>
+
+        <div class="rom-grid" id="romGrid">
+            <!-- ROM cards will be generated here -->
+        </div>
+
+        <div class="regional-variants">
+            <div class="variants-title">Regional Character Set Variants</div>
+            <div class="variant-list">
+                <div class="variant-item">
+                    <div class="variant-name">European Variants</div>
+                    <div class="variant-desc">Diacritical marks: ä, ö, ü, ç, ñ, å</div>
+                </div>
+                <div class="variant-item">
+                    <div class="variant-name">Japanese JIS</div>
+                    <div class="variant-desc">Half-width katakana, yen symbol</div>
+                </div>
+                <div class="variant-item">
+                    <div class="variant-name">Korean KSC</div>
+                    <div class="variant-desc">Hangul syllables, won symbol</div>
+                </div>
+                <div class="variant-item">
+                    <div class="variant-name">Soviet GOST</div>
+                    <div class="variant-desc">Cyrillic character support</div>
+                </div>
+                <div class="variant-item">
+                    <div class="variant-name">Arabic ISO</div>
+                    <div class="variant-desc">Right-to-left script support</div>
+                </div>
+                <div class="variant-item">
+                    <div class="variant-name">Hebrew Variants</div>
+                    <div class="variant-desc">Hebrew alphabet with nikud</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detailed-view" id="detailedView">
+        <div class="detailed-content">
+            <button class="close-button" onclick="closeDetailedView()">&times;</button>
+            <div id="detailedContent">
+                <!-- Detailed ROM information will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const romDatabase = [
+            {
+                id: 'signetics-2513',
+                name: 'Signetics 2513',
+                manufacturer: 'Signetics',
+                year: '1970',
+                era: '1970s',
+                status: 'preserved',
+                resolution: '5×7',
+                characters: 64,
+                variants: ['CM2140 (ASCII)', 'CM4800 (Katakana)', 'European variants'],
+                cultural_impact: 'Foundational character set designs that defined early terminal typography. The 5×7 matrix became a standard that influenced decades of computing.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_\n\`abcdefghijklmno\npqrstuvwxyz{|}~`,
+                significance: 'First widely adopted character generator ROM, established 5×7 matrix standard'
+            },
+            {
+                id: 'intel-2716-mcm6574',
+                name: 'Intel 2716 / MCM6574',
+                manufacturer: 'Intel/Motorola',
+                year: '1976',
+                era: '1970s',
+                status: 'preserved',
+                resolution: '7×9',
+                characters: 128,
+                variants: ['ASCII', 'European', 'Mathematical symbols'],
+                cultural_impact: 'Enabled higher quality terminal displays with descenders. The 7×9 matrix allowed for proper typography including lowercase with descenders.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_\n\`abcdefghijklmno\npqrstuvwxyz{|}~\nÄäÖöÜüßçñ±×÷°`,
+                significance: 'First ROM to support proper descenders, enabling professional typography'
+            },
+            {
+                id: 'dec-23-008m4',
+                name: 'DEC 23-008M4',
+                manufacturer: 'DEC',
+                year: '1978',
+                era: '1970s',
+                status: 'preserved',
+                resolution: '7×9',
+                characters: 128,
+                variants: ['ASCII', 'DEC Special Graphics', 'Line Drawing'],
+                cultural_impact: 'VT100 terminal character set that became THE standard. DEC Special Graphics enabled box drawing and early pseudo-graphics.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_\n┌─┐┌┬┐╔═╗╭─╮\n│ ││││║ ║│ │\n└─┘└┴┘╚═╝╰─╯`,
+                significance: 'Established VT100 compatibility standard, influenced all modern terminals'
+            },
+            {
+                id: 'ibm-5788005',
+                name: 'IBM 5788005',
+                manufacturer: 'IBM',
+                year: '1981',
+                era: '1980s',
+                status: 'preserved',
+                resolution: '8×8',
+                characters: 256,
+                variants: ['Code Page 437', 'International variants', 'Graphics characters'],
+                cultural_impact: 'IBM PC character set that enabled ANSI art and BBS culture. The extended ASCII characters became the foundation for text-mode graphics.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_\n░▒▓█▄▀■□▲►▼◄\n☺☻♥♦♣♠•◘○◙`,
+                significance: 'Enabled ANSI art culture, defined PC character standards'
+            },
+            {
+                id: 'mullard-saa5050',
+                name: 'Mullard SAA5050',
+                manufacturer: 'Mullard',
+                year: '1980',
+                era: '1980s',
+                status: 'preserved',
+                resolution: '5×9 interpolated to 10×18',
+                characters: 128,
+                variants: ['Teletext', 'BBC Micro', 'European teletext'],
+                cultural_impact: 'Advanced character generation with anti-aliasing. Influenced European terminal design and teletext systems.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_\n████▄▄▄▄████\n████████████`,
+                significance: 'First ROM with sophisticated interpolation and anti-aliasing'
+            },
+            {
+                id: 'general-instrument-ro-3-2513',
+                name: 'General Instrument RO-3-2513',
+                manufacturer: 'General Instrument',
+                year: '1975',
+                era: '1970s',
+                status: 'partial',
+                resolution: '5×7',
+                characters: 64,
+                variants: ['Multiple manufacturers', 'Compatible replacements'],
+                cultural_impact: 'Pin-compatible replacement for Signetics 2513. Multiple manufacturers created variants, leading to preservation challenges.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nPQRSTUVWXYZ[\\]^_`,
+                significance: 'Demonstrated early semiconductor industry competition and compatibility'
+            },
+            {
+                id: 'hitachi-hd44780',
+                name: 'Hitachi HD44780',
+                manufacturer: 'Hitachi',
+                year: '1987',
+                era: '1980s',
+                status: 'preserved',
+                resolution: '5×8',
+                characters: 256,
+                variants: ['Japanese', 'European', 'Custom character support'],
+                cultural_impact: 'LCD character display controller that brought character ROMs to embedded systems. Still widely used today.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\nαβγδεπΣΩ°√∞µ`,
+                significance: 'Bridged terminal ROMs to embedded LCD displays'
+            },
+            {
+                id: 'commodore-901225-01',
+                name: 'Commodore 901225-01',
+                manufacturer: 'Commodore',
+                year: '1982',
+                era: '1980s',
+                status: 'preserved',
+                resolution: '8×8',
+                characters: 256,
+                variants: ['PETSCII', 'Graphics symbols', 'Gaming characters'],
+                cultural_impact: 'Unique character set optimized for gaming and creativity. PETSCII became a distinct aesthetic in computing culture.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\n♠♣♥♦♫☺♀♂☀☽`,
+                significance: 'Alternative approach to PC character sets, influenced gaming culture'
+            },
+            {
+                id: 'apple-342-0133',
+                name: 'Apple 342-0133',
+                manufacturer: 'Apple',
+                year: '1984',
+                era: '1980s',
+                status: 'at-risk',
+                resolution: '7×8',
+                characters: 128,
+                variants: ['Apple II', 'Mousetext symbols'],
+                cultural_impact: 'Apple II character set with unique mousetext symbols for early GUI elements in text mode.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\n⌂ ⌘ ⌶ ⌘ ⌂`,
+                significance: 'Early attempt at GUI elements in character-based display'
+            },
+            {
+                id: 'amstrad-40010',
+                name: 'Amstrad 40010',
+                manufacturer: 'Amstrad',
+                year: '1984',
+                era: '1980s',
+                status: 'at-risk',
+                resolution: '8×8',
+                characters: 256,
+                variants: ['CPC variants', 'European localization'],
+                cultural_impact: 'European computer character set with strong graphics focus. Influenced European computing aesthetics.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\n░▒▓▀▄█▌▐║╬`,
+                significance: 'European alternative to IBM PC character standards'
+            },
+            {
+                id: 'atari-co12299',
+                name: 'Atari CO12299',
+                manufacturer: 'Atari',
+                year: '1979',
+                era: '1970s',
+                status: 'partial',
+                resolution: '8×8',
+                characters: 128,
+                variants: ['ATASCII', 'Gaming optimized'],
+                cultural_impact: 'Gaming-focused character set with unique symbols. ATASCII influenced game development and display.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\n♠♣♥♦♫`,
+                significance: 'Demonstrated gaming-specific character set design'
+            },
+            {
+                id: 'texas-instruments-tms9918',
+                name: 'TI TMS9918A Character ROM',
+                manufacturer: 'Texas Instruments',
+                year: '1981',
+                era: '1980s',
+                status: 'preserved',
+                resolution: '6×8',
+                characters: 256,
+                variants: ['Video game systems', 'Home computers'],
+                cultural_impact: 'Video Display Processor character set used in multiple systems. Influenced game console typography.',
+                sample_text: `!"#$%&'()*+,-./\n0123456789:;<=>?\n@ABCDEFGHIJKLMNO\n▀▄█▌▐░▒▓`,
+                significance: 'Cross-platform character standard for early game systems'
+            }
+        ];
+
+        function generateROMCards() {
+            const romGrid = document.getElementById('romGrid');
+            romGrid.innerHTML = '';
+
+            romDatabase.forEach(rom => {
+                const card = document.createElement('div');
+                card.className = 'rom-card';
+                card.innerHTML = `
+                    <div class="rom-header">
+                        <div class="rom-name">${rom.name}</div>
+                        <div class="rom-year">${rom.year}</div>
+                    </div>
+                    <div class="rom-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">Manufacturer:</span>
+                            <span class="spec-value">${rom.manufacturer}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Resolution:</span>
+                            <span class="spec-value">${rom.resolution}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Characters:</span>
+                            <span class="spec-value">${rom.characters}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Status:</span>
+                            <span class="spec-value">
+                                <span class="preservation-status status-${rom.status}">
+                                    ${rom.status.toUpperCase()}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="character-grid">
+                        <div class="character-sample">${rom.sample_text}</div>
+                    </div>
+                    <div class="cultural-impact">
+                        <strong>Cultural Impact:</strong> ${rom.cultural_impact}
+                    </div>
+                `;
+                card.addEventListener('click', () => showDetailedView(rom));
+                romGrid.appendChild(card);
+            });
+        }
+
+        function showDetailedView(rom) {
+            const detailedView = document.getElementById('detailedView');
+            const detailedContent = document.getElementById('detailedContent');
+            
+            detailedContent.innerHTML = `
+                <h2>${rom.name} (${rom.year})</h2>
+                <div class="rom-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">Manufacturer:</span>
+                        <span class="spec-value">${rom.manufacturer}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Resolution:</span>
+                        <span class="spec-value">${rom.resolution}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Character Count:</span>
+                        <span class="spec-value">${rom.characters}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Preservation Status:</span>
+                        <span class="spec-value">
+                            <span class="preservation-status status-${rom.status}">
+                                ${rom.status.toUpperCase()}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                
+                <h3>Full Character Set</h3>
+                <div class="full-character-set">${rom.sample_text}</div>
+                
+                <h3>Historical Significance</h3>
+                <p>${rom.significance}</p>
+                
+                <h3>Cultural Impact</h3>
+                <p>${rom.cultural_impact}</p>
+                
+                <h3>Known Variants</h3>
+                <ul>
+                    ${rom.variants.map(variant => `<li>${variant}</li>`).join('')}
+                </ul>
+            `;
+            
+            detailedView.style.display = 'block';
+        }
+
+        function closeDetailedView() {
+            document.getElementById('detailedView').style.display = 'none';
+        }
+
+        function filterROMs() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const yearFilter = document.getElementById('yearFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const manufacturerFilter = document.getElementById('manufacturerFilter').value;
+
+            const romCards = document.querySelectorAll('.rom-card');
+            
+            romCards.forEach((card, index) => {
+                const rom = romDatabase[index];
+                let show = true;
+
+                // Text search
+                if (searchTerm && !rom.name.toLowerCase().includes(searchTerm) && 
+                    !rom.manufacturer.toLowerCase().includes(searchTerm) &&
+                    !rom.cultural_impact.toLowerCase().includes(searchTerm)) {
+                    show = false;
+                }
+
+                // Year filter
+                if (yearFilter && rom.era !== yearFilter) {
+                    show = false;
+                }
+
+                // Status filter
+                if (statusFilter && rom.status !== statusFilter) {
+                    show = false;
+                }
+
+                // Manufacturer filter
+                if (manufacturerFilter && rom.manufacturer.toLowerCase() !== manufacturerFilter) {
+                    show = false;
+                }
+
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterROMs);
+        document.getElementById('yearFilter').addEventListener('change', filterROMs);
+        document.getElementById('statusFilter').addEventListener('change', filterROMs);
+        document.getElementById('manufacturerFilter').addEventListener('change', filterROMs);
+
+        // Close detailed view when clicking outside
+        document.getElementById('detailedView').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detailedView')) {
+                closeDetailedView();
+            }
+        });
+
+        // Initialize
+        generateROMCards();
+    </script>
+</body>
+</html>

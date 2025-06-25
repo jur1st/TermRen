@@ -1,0 +1,76 @@
+body {
+    font-family: Georgia, serif;
+    line-height: 1.6;
+    margin: 2em;
+    max-width: 40em;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 1.5em 0 1em 0;
+    page-break-before: always;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 1.3em 0 0.8em 0;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin: 1.2em 0 0.6em 0;
+}
+
+p {
+    margin: 1em 0;
+    text-align: justify;
+}
+
+em {
+    font-style: italic;
+}
+
+.chapter-subtitle {
+    font-style: italic;
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 2em;
+}
+
+.production-note {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+    border-left: 3px solid #ccc;
+    padding-left: 1em;
+    margin: 1.5em 0;
+}
+
+hr {
+    border: none;
+    text-align: center;
+    margin: 2em 0;
+}
+
+hr:before {
+    content: "* * *";
+    font-size: 1.2em;
+    color: #666;
+}
+
+.title-page {
+    text-align: center;
+    margin-top: 4em;
+}
+
+.title-page h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.title-page .subtitle {
+    font-size: 1.5em;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 3em;
+}

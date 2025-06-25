@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT100 Terminal Simulation - Terminal Renaissance</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #2a2a2a;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            color: #00ff00;
+        }
+
+        .vt100-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 3px solid #444;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .vt100-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00ff00;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .vt100-screen {
+            background: #000;
+            border: 2px solid #333;
+            padding: 12px;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            color: #00ff00;
+            width: 640px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .vt100-content {
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .cursor {
+            background: #00ff00;
+            color: #000;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .demo-button {
+            background: #004400;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 8px 16px;
+            margin: 4px;
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+        }
+
+        .demo-button:hover {
+            background: #006600;
+        }
+
+        .info-panel {
+            margin-top: 20px;
+            background: #111;
+            border: 1px solid #333;
+            padding: 15px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .escape-sequence {
+            color: #ffff00;
+            font-weight: bold;
+        }
+
+        .command-output {
+            color: #00ff00;
+        }
+
+        .system-info {
+            color: #aaaaaa;
+        }
+
+        .vt100-status {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .demo-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+        }
+
+        .demo-title {
+            color: #ffff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .technical-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .spec-table {
+            border: 1px solid #333;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 11px;
+        }
+
+        .spec-table th, .spec-table td {
+            border: 1px solid #333;
+            padding: 4px 8px;
+            text-align: left;
+        }
+
+        .spec-table th {
+            background: #222;
+            color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="vt100-container">
+        <div class="vt100-header">
+            DEC VT100 Terminal Simulation - Reference Standard (1978)
+        </div>
+
+        <div class="vt100-screen" id="vt100Screen">
+            <div class="vt100-content" id="vt100Content">VT100 Terminal Emulator v1.0
+
+Digital Equipment Corporation VT100 Video Terminal
+
+Screen: 80 columns x 24 rows
+Character Set: ASCII + DEC Special Graphics
+Baud Rate: 300-19200
+Features: ANSI Escape Sequences, Smooth Scrolling
+
+Type 'help' for available commands or select a demo below.
+
+vt100$ <span class="cursor"> </span></div>
+            <div class="vt100-status">24x80 | Online | Ready</div>
+        </div>
+
+        <div class="controls">
+            <button class="demo-button" onclick="runDemo('boot')">Boot Sequence</button>
+            <button class="demo-button" onclick="runDemo('ansi')">ANSI Sequences</button>
+            <button class="demo-button" onclick="runDemo('graphics')">DEC Graphics</button>
+            <button class="demo-button" onclick="runDemo('colors')">Color Test</button>
+            <button class="demo-button" onclick="runDemo('clear')">Clear Screen</button>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-title">Historical Significance</div>
+            <p>The DEC VT100, released in 1978, became THE terminal standard that defined computing for decades. Its ANSI escape sequence implementation became the foundation for all modern terminal emulators.</p>
+            
+            <div class="technical-specs">
+                <div>
+                    <div class="demo-title">Technical Specifications</div>
+                    <table class="spec-table">
+                        <tr><th>Feature</th><th>Specification</th></tr>
+                        <tr><td>Display</td><td>80×24 characters</td></tr>
+                        <tr><td>Character Matrix</td><td>7×9 dot matrix</td></tr>
+                        <tr><td>Phosphor</td><td>P1 (green) or P3 (amber)</td></tr>
+                        <tr><td>Baud Rates</td><td>75-19200</td></tr>
+                        <tr><td>Memory</td><td>2KB display buffer</td></tr>
+                        <tr><td>Character Set</td><td>ASCII + DEC Special</td></tr>
+                    </table>
+                </div>
+                
+                <div>
+                    <div class="demo-title">Cultural Impact</div>
+                    <table class="spec-table">
+                        <tr><th>Influence</th><th>Legacy</th></tr>
+                        <tr><td>ANSI Standard</td><td>Escape sequences</td></tr>
+                        <tr><td>80×24 Layout</td><td>Terminal standard</td></tr>
+                        <tr><td>Green Phosphor</td><td>Hacker aesthetic</td></tr>
+                        <tr><td>Reliability</td><td>Professional trust</td></tr>
+                        <tr><td>Compatibility</td><td>Universal adoption</td></tr>
+                        <tr><td>Terminal Culture</td><td>Text interface preference</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="demo-title">ANSI Escape Sequences Demonstrated</div>
+            <div id="ansiDemo">
+                Select a demo above to see authentic VT100 behavior including:
+                <ul>
+                    <li><span class="escape-sequence">ESC[H</span> - Cursor home position</li>
+                    <li><span class="escape-sequence">ESC[2J</span> - Clear entire screen</li>
+                    <li><span class="escape-sequence">ESC[31m</span> - Set text color (if supported)</li>
+                    <li><span class="escape-sequence">ESC[7m</span> - Reverse video</li>
+                    <li><span class="escape-sequence">ESC[1m</span> - Bold/bright text</li>
+                    <li><span class="escape-sequence">ESC[0m</span> - Reset all attributes</li>
+                </ul>
+                
+                <p class="system-info">Note: Original VT100 was monochrome (green or amber). Color support was added in later VT terminals.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLine = 0;
+        let currentCol = 0;
+        let isTyping = false;
+
+        const demos = {
+            boot: [
+                { delay: 500, text: '\x1b[2J\x1b[H' }, // Clear screen, home cursor
+                { delay: 1000, text: 'DEC VT100 Terminal Bootstrap\n\n' },
+                { delay: 500, text: 'ROM Checksum: OK\n' },
+                { delay: 300, text: 'RAM Test: ' },
+                { delay: 800, text: '2KB OK\n' },
+                { delay: 400, text: 'Character Generator: Ready\n' },
+                { delay: 600, text: 'UART Configuration: 9600 8N1\n' },
+                { delay: 800, text: 'ANSI Mode: Enabled\n\n' },
+                { delay: 1000, text: '\x1b[1mVT100 Ready\x1b[0m\n\n' },
+                { delay: 500, text: 'vt100$ ' }
+            ],
+            
+            ansi: [
+                { delay: 200, text: '\x1b[2J\x1b[H' },
+                { delay: 500, text: 'ANSI Escape Sequence Demonstration\n\n' },
+                { delay: 800, text: '\x1b[1mBold Text\x1b[0m\n' },
+                { delay: 800, text: '\x1b[7mReverse Video\x1b[0m\n' },
+                { delay: 800, text: '\x1b[4mUnderlined Text\x1b[0m\n\n' },
+                { delay: 1000, text: 'Cursor Positioning:\n' },
+                { delay: 500, text: '\x1b[10;20HText at row 10, col 20\n' },
+                { delay: 1000, text: '\x1b[15;1H\x1b[31mColor Text (if supported)\x1b[0m\n\n' },
+                { delay: 800, text: '\x1b[20;1HPress any key to continue...' }
+            ],
+            
+            graphics: [
+                { delay: 200, text: '\x1b[2J\x1b[H' },
+                { delay: 500, text: 'DEC Special Character Set\n\n' },
+                { delay: 300, text: 'Line Drawing Characters:\n' },
+                { delay: 500, text: '\x1b(0' }, // Switch to DEC special character set
+                { delay: 100, text: 'lqqqqqqqqqqqqqqqqqqqqqk\n' },
+                { delay: 100, text: 'x  Box Drawing Example  x\n' },
+                { delay: 100, text: 'x                      x\n' },
+                { delay: 100, text: 'tqqqqqqqqqqwqqqqqqqqqqu\n' },
+                { delay: 100, text: 'x Left Col x Right Col x\n' },
+                { delay: 100, text: 'mqqqqqqqqqqvqqqqqqqqqqqj\n' },
+                { delay: 500, text: '\x1b(B' }, // Switch back to ASCII
+                { delay: 800, text: '\nDiamond Pattern:\n' },
+                { delay: 300, text: '\x1b(0' },
+                { delay: 100, text: '   `\n' },
+                { delay: 100, text: '  a a\n' },
+                { delay: 100, text: ' a   a\n' },
+                { delay: 100, text: '  a a\n' },
+                { delay: 100, text: '   `\n' },
+                { delay: 500, text: '\x1b(B' }
+            ],
+            
+            colors: [
+                { delay: 200, text: '\x1b[2J\x1b[H' },
+                { delay: 500, text: 'VT100 Display Characteristics\n\n' },
+                { delay: 800, text: 'Original VT100: Monochrome Display\n' },
+                { delay: 600, text: 'Phosphor: P1 (Green) or P3 (Amber)\n\n' },
+                { delay: 1000, text: '\x1b[1mIntensity Variations:\x1b[0m\n' },
+                { delay: 400, text: 'Normal intensity text\n' },
+                { delay: 400, text: '\x1b[1mBold/bright intensity\x1b[0m\n' },
+                { delay: 400, text: '\x1b[2mDim intensity (if supported)\x1b[0m\n\n' },
+                { delay: 800, text: '\x1b[7mReverse video was primary highlight\x1b[0m\n\n' },
+                { delay: 1000, text: 'Later terminals added color support:\n' },
+                { delay: 300, text: '\x1b[31mRed \x1b[32mGreen \x1b[33mYellow \x1b[34mBlue\x1b[0m\n' },
+                { delay: 300, text: '\x1b[35mMagenta \x1b[36mCyan \x1b[37mWhite\x1b[0m\n' }
+            ],
+            
+            clear: [
+                { delay: 200, text: '\x1b[2J\x1b[H' },
+                { delay: 500, text: 'VT100 Terminal Simulation\n\nReady for commands.\n\nvt100$ ' }
+            ]
+        };
+
+        function typeText(text, callback) {
+            if (isTyping) return;
+            isTyping = true;
+            
+            const content = document.getElementById('vt100Content');
+            let i = 0;
+            
+            function typeChar() {
+                if (i < text.length) {
+                    const char = text[i];
+                    if (char === '\x1b') {
+                        // Handle ANSI escape sequence
+                        const escapeMatch = text.substring(i).match(/^\x1b\[[0-9;]*[a-zA-Z]/);
+                        if (escapeMatch) {
+                            processAnsiSequence(escapeMatch[0]);
+                            i += escapeMatch[0].length;
+                        } else {
+                            // Handle DEC character set switches
+                            const decMatch = text.substring(i).match(/^\x1b\([0B]/);
+                            if (decMatch) {
+                                // Character set switching - simplified for display
+                                i += decMatch[0].length;
+                            } else {
+                                i++;
+                            }
+                        }
+                    } else if (char === '\n') {
+                        content.textContent += char;
+                        i++;
+                    } else {
+                        content.textContent += char;
+                        i++;
+                    }
+                    setTimeout(typeChar, 50);
+                } else {
+                    isTyping = false;
+                    if (callback) callback();
+                }
+            }
+            
+            typeChar();
+        }
+
+        function processAnsiSequence(sequence) {
+            const content = document.getElementById('vt100Content');
+            const text = content.textContent;
+            
+            if (sequence === '\x1b[2J') {
+                // Clear screen
+                content.textContent = '';
+            } else if (sequence === '\x1b[H') {
+                // Home cursor - simplified
+                // In real implementation, this would position cursor
+            } else if (sequence.match(/^\x1b\[[0-9]+;[0-9]+H/)) {
+                // Position cursor - simplified for demo
+                // Real implementation would handle actual positioning
+            } else {
+                // For other sequences, just continue
+                // Real VT100 would handle colors, formatting, etc.
+            }
+        }
+
+        function runDemo(demoName) {
+            if (isTyping) return;
+            
+            const demo = demos[demoName];
+            if (!demo) return;
+            
+            let stepIndex = 0;
+            
+            function runStep() {
+                if (stepIndex < demo.length) {
+                    const step = demo[stepIndex];
+                    setTimeout(() => {
+                        typeText(step.text, () => {
+                            stepIndex++;
+                            runStep();
+                        });
+                    }, step.delay);
+                }
+            }
+            
+            runStep();
+            
+            // Update info panel
+            updateInfoPanel(demoName);
+        }
+
+        function updateInfoPanel(demoName) {
+            const infoPanel = document.getElementById('ansiDemo');
+            const demoInfo = {
+                boot: 'Demonstrates the VT100 bootstrap sequence showing ROM checks, memory tests, and initialization procedures that made these terminals reliable workhorses.',
+                ansi: 'Shows standard ANSI escape sequences that the VT100 popularized, becoming the foundation for all modern terminal emulation.',
+                graphics: 'DEC Special Character Set enabled box-drawing and simple graphics, crucial for early terminal-based user interfaces.',
+                colors: 'Original VT100 was monochrome, but the terminal standard evolved to support color while maintaining compatibility.',
+                clear: 'Basic terminal reset to ready state.'
+            };
+            
+            infoPanel.innerHTML = `
+                <strong>Demo: ${demoName.toUpperCase()}</strong><br><br>
+                ${demoInfo[demoName] || 'Terminal demonstration in progress.'}
+                <br><br>
+                <span class="system-info">This simulation demonstrates core VT100 functionality that established terminal computing standards still used today.</span>
+            `;
+        }
+
+        // Initialize with boot demo
+        setTimeout(() => runDemo('clear'), 1000);
+    </script>
+</body>
+</html>

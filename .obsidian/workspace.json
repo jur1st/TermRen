@@ -1,0 +1,255 @@
+{
+  "main": {
+    "id": "595470afe6c1f88e",
+    "type": "split",
+    "children": [
+      {
+        "id": "ba6fcc53f22ec52a",
+        "type": "tabs",
+        "dimension": 64.02116402116403,
+        "children": [
+          {
+            "id": "c838642e1830fc0f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fd7a9c1bbba476eb",
+        "type": "split",
+        "dimension": 35.978835978835974,
+        "children": [
+          {
+            "id": "16a6e422d1ebd3dd",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "a3f8e8b9e7a2fd18",
+                "type": "leaf",
+                "state": {
+                  "type": "graph",
+                  "state": {},
+                  "icon": "lucide-git-fork",
+                  "title": "Graph view"
+                }
+              }
+            ]
+          },
+          {
+            "id": "a4cec1f30d0b8fc0",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "eb7ca9c32838ed9a",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Manuscript Table of Contents.md",
+                    "mode": "preview",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Manuscript Table of Contents"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "horizontal"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "38dc09311b86bf1b",
+    "type": "split",
+    "children": [
+      {
+        "id": "d51d8e3bbbd0fe76",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa560cb0816510cd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "ce6497244b1636f7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "df69054edf00b097",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "6473bbdbbc8cae22",
+    "type": "split",
+    "children": [
+      {
+        "id": "a0fdde82e660c3a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "101fe834ae813796",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "2d66b07018d178ce",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "b861df58ced5dba5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "5fcc8f3faae5cdb9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c838642e1830fc0f",
+  "lastOpenFiles": [
+    "Manuscript Table of Contents.md",
+    "README.md",
+    "Untitled.base",
+    "01-Chapters/part1-history/chapter2-5-suit-invasion.md",
+    "README-THEMES.md",
+    "00-START-HERE/Welcome-and-Navigation.md",
+    "SYSTEM-INSTRUCTIONS/research/WORKFLOW.md",
+    "99-Archive-Session-Docs/VAULT-NAVIGATION.md",
+    "99-Archive-Session-Docs/REORGANIZATION-PLAN.md",
+    "03-Research-Infrastructure/VAULT-INDEX.md",
+    "03-Research-Infrastructure/DISCOVERY-CHECKLIST.md",
+    "03-Research-Infrastructure/ACCUMULATED-KNOWLEDGE.md",
+    "04-Interactive-Demos/README.md",
+    "03-Research-Infrastructure/README.md",
+    "02-Knowledge-Graph/README.md",
+    "01-Chapters/README.md",
+    "00-START-HERE/README.md",
+    "98-Archive-Canvas-Dashboards/Welcome-Dashboard.canvas",
+    "98-Archive-Canvas-Dashboards/Research-Timeline-Dashboard.canvas",
+    "98-Archive-Canvas-Dashboards/Production-Workflow-Dashboard.canvas",
+    "98-Archive-Canvas-Dashboards/Knowledge-Typography-Evolution.canvas",
+    "98-Archive-Canvas-Dashboards/Knowledge-Technical-Foundations.canvas",
+    "98-Archive-Canvas-Dashboards/Knowledge-Navigation-Hub.canvas",
+    "98-Archive-Canvas-Dashboards/Knowledge-Key-Figures.canvas",
+    "98-Archive-Canvas-Dashboards/Knowledge-Cultural-Movements.canvas",
+    "98-Archive-Canvas-Dashboards/README.md",
+    "98-Archive-Canvas-Dashboards",
+    "99-Archive-Session-Docs/OBSIDIAN-CONFIGURATION-FIX.md",
+    "99-Archive-Session-Docs/ENHANCEMENT-SUMMARY.md",
+    "99-Archive-Session-Docs/CONVERSATION-SUMMARY.md",
+    "99-Archive-Session-Docs",
+    "01-Chapters/Chapter-02.5-Suit-Invasion.md",
+    "Welcome-Dashboard.canvas",
+    "Solarized.md",
+    "ANSI Art.md",
+    "VAULT-NAVIGATION.md",
+    "VAULT-INDEX.md",
+    "Knowledge-Key-Figures.canvas"
+  ]
+}

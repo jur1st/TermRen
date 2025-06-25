@@ -1,0 +1,243 @@
+/* ============================================
+   ENGINEERING HELVETICA - Simple 1970s Technical Manual Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Inspired by NASA Graphics Manual & Corporate Engineering Docs
+   ============================================ */
+
+/* @settings
+
+name: Engineering Helvetica Theme
+id: engineering-helvetica
+settings:
+  -
+    id: engineering-accent-color
+    title: Accent Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#FF5800'
+    default-dark: '#FF7A29'
+  -
+    id: engineering-grid-size
+    title: Grid Unit Size
+    type: variable-number-slider
+    default: 8
+    min: 4
+    max: 16
+    step: 1
+    format: px
+*/
+
+:root {
+  /* 1970s Engineering Color Palette */
+  --engineering-orange: #FF5800;     /* NASA Orange */
+  --engineering-blue: #003f7f;       /* IBM Blue */
+  --engineering-gray-1: #f5f5f5;    /* Light gray */
+  --engineering-gray-2: #e8e8e8;    
+  --engineering-gray-3: #d0d0d0;
+  --engineering-gray-4: #a8a8a8;
+  --engineering-gray-5: #707070;    /* Medium gray */
+  --engineering-gray-6: #4a4a4a;
+  --engineering-gray-7: #2d2d2d;
+  --engineering-gray-8: #1a1a1a;    /* Near black */
+  
+  /* Grid System Variables */
+  --grid-unit: var(--engineering-grid-size, 8px);
+  --grid-2x: calc(var(--grid-unit) * 2);
+  --grid-3x: calc(var(--grid-unit) * 3);
+  --grid-4x: calc(var(--grid-unit) * 4);
+  
+  /* Simple Typography Stack */
+  --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Monaco, Consolas, monospace;
+  
+  /* Font Weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+}
+
+.theme-light {
+  /* Light Mode Colors */
+  --background-primary: #ffffff;
+  --background-primary-alt: var(--engineering-gray-1);
+  --background-secondary: var(--engineering-gray-2);
+  --background-modifier-border: var(--engineering-gray-3);
+  
+  --text-normal: var(--engineering-gray-8);
+  --text-muted: var(--engineering-gray-6);
+  --text-faint: var(--engineering-gray-5);
+  
+  --interactive-accent: var(--engineering-accent-color, var(--engineering-orange));
+  --interactive-accent-hover: var(--engineering-blue);
+}
+
+.theme-dark {
+  /* Dark Mode Colors */
+  --background-primary: var(--engineering-gray-8);
+  --background-primary-alt: var(--engineering-gray-7);
+  --background-secondary: var(--engineering-gray-7);
+  --background-modifier-border: var(--engineering-gray-5);
+  
+  --text-normal: var(--engineering-gray-1);
+  --text-muted: var(--engineering-gray-3);
+  --text-faint: var(--engineering-gray-4);
+  
+  --interactive-accent: var(--engineering-accent-color, var(--engineering-orange));
+  --interactive-accent-hover: #FF8C42;
+}
+
+/* MARKDOWN CONTENT ONLY - No Interface Overrides */
+
+/* Reading and Writing Areas */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-text);
+  padding: var(--grid-4x);
+  max-width: calc(var(--grid-unit) * 90);
+  margin: 0 auto;
+}
+
+/* Headers - Engineering Manual Style */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-text);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: var(--grid-2x);
+  margin-bottom: var(--grid-unit);
+}
+
+/* Section Headers (H1, H2) - All Caps Like Engineering Specs */
+.markdown-preview-view h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: var(--font-medium);
+  border-bottom: 2px solid var(--background-modifier-border);
+  padding-bottom: var(--grid-unit);
+  margin-bottom: var(--grid-2x);
+  margin-top: var(--grid-3x);
+  font-size: 28px;
+}
+
+.markdown-preview-view h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--font-medium);
+  font-size: 22px;
+  margin-top: var(--grid-3x);
+  margin-bottom: var(--grid-unit);
+}
+
+.markdown-preview-view h3 {
+  font-size: 18px;
+  margin-top: var(--grid-2x);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+.markdown-preview-view h4 {
+  font-size: 16px;
+  margin-top: var(--grid-2x);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: 14px;
+  margin-top: var(--grid-unit);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+/* Code Blocks - Technical Documentation Style */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-mono);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 0;
+}
+
+.markdown-preview-view pre {
+  padding: var(--grid-2x);
+  margin: var(--grid-unit) 0;
+}
+
+.markdown-preview-view code {
+  padding: 2px 4px;
+  font-size: 0.9em;
+}
+
+/* Tables - Engineering Specification Style */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  border: 1px solid var(--background-modifier-border);
+  margin: var(--grid-3x) 0;
+  font-size: 13px;
+}
+
+.markdown-preview-view th {
+  background: var(--background-secondary);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 12px;
+  padding: var(--grid-unit) var(--grid-2x);
+  text-align: left;
+  border-bottom: 2px solid var(--background-modifier-border);
+}
+
+.markdown-preview-view td {
+  padding: var(--grid-unit) var(--grid-2x);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* Blockquotes - Technical Note Style */
+.markdown-preview-view blockquote {
+  border-left: 4px solid var(--interactive-accent);
+  margin: var(--grid-2x) 0;
+  padding: var(--grid-unit) var(--grid-3x);
+  background: var(--background-secondary);
+  font-style: normal;
+}
+
+/* Links - Minimal Underline Style */
+.markdown-preview-view a {
+  color: var(--interactive-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.markdown-preview-view a:hover {
+  border-bottom-color: var(--interactive-accent);
+}
+
+/* Lists - Dense Engineering Style */
+.markdown-preview-view ul, 
+.markdown-preview-view ol {
+  margin-left: var(--grid-2x);
+  margin-top: calc(var(--grid-unit) / 2);
+  margin-bottom: var(--grid-2x);
+}
+
+.markdown-preview-view li {
+  margin-bottom: calc(var(--grid-unit) / 4);
+  line-height: 1.4;
+}
+
+.markdown-preview-view li p {
+  margin-top: 0;
+  margin-bottom: calc(var(--grid-unit) / 4);
+}
+
+/* Horizontal Rules - Section Dividers */
+.markdown-preview-view hr {
+  border: none;
+  height: 2px;
+  background: var(--background-modifier-border);
+  margin: var(--grid-4x) 0;
+}

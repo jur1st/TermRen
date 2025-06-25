@@ -1,0 +1,303 @@
+/* ============================================
+   INDUSTRIAL GOTHAM - Simple 1970s Bauhaus Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Inspired by Industrial Design & Bauhaus Typography
+   ============================================ */
+
+/* @settings
+
+name: Industrial Gotham Theme
+id: industrial-gotham
+settings:
+  -
+    id: gotham-accent-color
+    title: Accent Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#D73502'
+    default-dark: '#FF6B35'
+  -
+    id: gotham-grid-size
+    title: Grid Unit
+    type: variable-number-slider
+    default: 12
+    min: 8
+    max: 16
+    step: 2
+    format: px
+*/
+
+:root {
+  /* Industrial Color Palette - 1970s Manufacturing */
+  --industrial-red: #D73502;         /* Safety Orange-Red */
+  --industrial-orange: #FF6B35;      /* Machinery Orange */
+  --industrial-yellow: #F7931E;      /* Caution Yellow */
+  --industrial-blue: #004225;        /* Machine Blue */
+  --industrial-teal: #005B4F;        /* Industrial Teal */
+  
+  /* Concrete Gray Scale - Brutalist */
+  --concrete-100: #F7F7F7;          /* Light Concrete */
+  --concrete-200: #E8E8E8;
+  --concrete-300: #D1D1D1;
+  --concrete-400: #B4B4B4;
+  --concrete-500: #9B9B9B;          /* Medium Concrete */
+  --concrete-600: #6B6B6B;
+  --concrete-700: #515151;
+  --concrete-800: #343434;
+  --concrete-900: #212121;          /* Dark Concrete */
+  
+  /* Grid System - Bauhaus Inspired */
+  --grid-unit: var(--gotham-grid-size, 12px);
+  --grid-2x: calc(var(--grid-unit) * 2);
+  --grid-3x: calc(var(--grid-unit) * 3);
+  --grid-4x: calc(var(--grid-unit) * 4);
+  
+  /* Simple Typography Stack */
+  --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Monaco, Consolas, monospace;
+  
+  /* Font Weights - Geometric */
+  --font-light: 300;
+  --font-book: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+}
+
+.theme-light {
+  /* Light Mode - Clean Industrial */
+  --background-primary: #FFFFFF;
+  --background-primary-alt: var(--concrete-100);
+  --background-secondary: var(--concrete-200);
+  --background-secondary-alt: var(--concrete-300);
+  --background-modifier-border: var(--concrete-400);
+  
+  --text-normal: var(--concrete-900);
+  --text-muted: var(--concrete-700);
+  --text-faint: var(--concrete-600);
+  
+  --interactive-accent: var(--gotham-accent-color, var(--industrial-red));
+  --interactive-accent-hover: var(--industrial-orange);
+  
+  --code-background: var(--concrete-100);
+}
+
+.theme-dark {
+  /* Dark Mode - Industrial Night Shift */
+  --background-primary: var(--concrete-900);
+  --background-primary-alt: var(--concrete-800);
+  --background-secondary: var(--concrete-800);
+  --background-secondary-alt: var(--concrete-700);
+  --background-modifier-border: var(--concrete-600);
+  
+  --text-normal: var(--concrete-100);
+  --text-muted: var(--concrete-400);
+  --text-faint: var(--concrete-500);
+  
+  --interactive-accent: var(--gotham-accent-color, var(--industrial-orange));
+  --interactive-accent-hover: var(--industrial-yellow);
+  
+  --code-background: var(--concrete-800);
+}
+
+/* MARKDOWN CONTENT ONLY - No Interface Overrides */
+
+/* Reading and Writing Areas */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-text);
+  font-weight: var(--font-book);
+  letter-spacing: -0.01em;
+  padding: var(--grid-4x);
+  max-width: calc(var(--grid-unit) * 80);
+  margin: 0 auto;
+}
+
+/* Headers - Industrial Typography */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-text);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: var(--grid-3x);
+  margin-bottom: var(--grid-unit);
+}
+
+/* H1 - Bold Industrial Style */
+.markdown-preview-view h1 {
+  font-size: 36px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 4px solid var(--interactive-accent);
+  padding-bottom: var(--grid-2x);
+  margin-bottom: var(--grid-3x);
+  margin-top: var(--grid-4x);
+}
+
+/* H2 - Section Dividers */
+.markdown-preview-view h2 {
+  font-size: 28px;
+  font-weight: var(--font-bold);
+  color: var(--interactive-accent);
+  margin-top: var(--grid-4x);
+  margin-bottom: var(--grid-unit);
+}
+
+/* H3 - Subsections */
+.markdown-preview-view h3 {
+  font-size: 22px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-3x);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+.markdown-preview-view h4 {
+  font-size: 20px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-2x);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: 18px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-2x);
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+/* Code Blocks - Industrial Monospace */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-mono);
+  background: var(--code-background);
+  border: 2px solid var(--background-modifier-border);
+  border-radius: 0;
+}
+
+.markdown-preview-view pre {
+  padding: var(--grid-3x);
+  margin: var(--grid-3x) 0;
+  border-left: 4px solid var(--interactive-accent);
+}
+
+.markdown-preview-view code {
+  padding: 4px 6px;
+  font-size: 0.9em;
+  font-weight: var(--font-medium);
+}
+
+/* Tables - Industrial Grid Style */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  margin: var(--grid-4x) 0;
+  width: 100%;
+  border: 3px solid var(--interactive-accent);
+}
+
+.markdown-preview-view th {
+  background: var(--interactive-accent);
+  color: white;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--grid-2x);
+  text-align: left;
+}
+
+.markdown-preview-view td {
+  padding: var(--grid-2x);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+/* Blockquotes - Industrial Warning Style */
+.markdown-preview-view blockquote {
+  border-left: 6px solid var(--interactive-accent);
+  background: var(--background-secondary);
+  margin: var(--grid-4x) 0;
+  padding: var(--grid-3x);
+  position: relative;
+  font-weight: var(--font-medium);
+}
+
+.markdown-preview-view blockquote::before {
+  content: "⚠";
+  position: absolute;
+  top: var(--grid-2x);
+  left: var(--grid-2x);
+  font-size: 18px;
+  color: var(--interactive-accent);
+}
+
+.markdown-preview-view blockquote p:first-child {
+  margin-left: var(--grid-3x);
+}
+
+/* Links - Bold Industrial Style */
+.markdown-preview-view a {
+  color: var(--interactive-accent);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.markdown-preview-view a:hover {
+  border-bottom-color: var(--interactive-accent);
+}
+
+/* Lists - Dense Industrial Spacing */
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+  margin: var(--grid-unit) 0;
+  padding-left: var(--grid-3x);
+}
+
+.markdown-preview-view li {
+  margin-bottom: calc(var(--grid-unit) / 2);
+  line-height: 1.5;
+  font-weight: var(--font-book);
+}
+
+.markdown-preview-view li p {
+  margin-top: 0;
+  margin-bottom: calc(var(--grid-unit) / 2);
+}
+
+/* Strong emphasis - Industrial bold */
+.markdown-preview-view strong {
+  font-weight: var(--font-bold);
+  color: var(--interactive-accent);
+}
+
+/* Horizontal Rules - Industrial Divider */
+.markdown-preview-view hr {
+  border: none;
+  height: 3px;
+  background: var(--interactive-accent);
+  margin: calc(var(--grid-unit) * 6) 0;
+}
+
+/* Callouts - Industrial Alerts */
+.markdown-preview-view .callout {
+  border: 2px solid var(--background-modifier-border);
+  border-left: 6px solid var(--interactive-accent);
+  margin: var(--grid-3x) 0;
+  padding: var(--grid-3x);
+  background: var(--background-secondary);
+  border-radius: 0;
+}
+
+.markdown-preview-view .callout-title {
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--interactive-accent);
+  margin-bottom: var(--grid-2x);
+}

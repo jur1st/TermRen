@@ -1,0 +1,6 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.contains("01-Chapters")

@@ -1,0 +1,371 @@
+/* ============================================
+   TERMINAL MONOSPACE - Premium Monospace Terminal Theme
+   For Obsidian 1.9.1 with Minimal Theme Base
+   Uses Berkeley Mono Variable, Departure Mono, Terminus
+   ============================================ */
+
+/* @settings
+
+name: Terminal Monospace Theme
+id: terminal-monospace
+settings:
+  -
+    id: terminal-accent-color
+    title: Accent Color
+    type: variable-themed-color
+    format: hex
+    default-light: '#00FF00'
+    default-dark: '#00FF41'
+  -
+    id: terminal-grid-size
+    title: Grid Unit Size
+    type: variable-number-slider
+    default: 12
+    min: 8
+    max: 20
+    step: 2
+    format: px
+  -
+    id: terminal-contrast-mode
+    title: High Contrast Mode
+    description: Maximum contrast for terminal authenticity
+    type: class-toggle
+    default: false
+*/
+
+:root {
+  /* Terminal Color Palette - Authentic CRT Colors */
+  --terminal-green: #00FF00;        /* Classic terminal green */
+  --terminal-green-bright: #00FF41; /* Bright phosphor green */
+  --terminal-amber: #FFB000;        /* Amber terminal */
+  --terminal-white: #FFFFFF;        /* Paper white */
+  --terminal-cyan: #00FFFF;         /* Electric cyan */
+  
+  /* Matrix-style greens */
+  --matrix-dark: #001100;
+  --matrix-medium: #003300;
+  --matrix-light: #005500;
+  --matrix-bright: #00AA00;
+  
+  /* Monochrome grays */
+  --mono-black: #000000;
+  --mono-gray-1: #111111;
+  --mono-gray-2: #222222;
+  --mono-gray-3: #333333;
+  --mono-gray-4: #444444;
+  --mono-gray-5: #555555;
+  --mono-gray-6: #666666;
+  --mono-gray-7: #777777;
+  --mono-gray-8: #888888;
+  --mono-gray-9: #999999;
+  --mono-white: #FFFFFF;
+  
+  /* Grid System - Terminal Spacing */
+  --grid-unit: var(--terminal-grid-size, 12px);
+  --grid-half: calc(var(--grid-unit) / 2);
+  --grid-2x: calc(var(--grid-unit) * 2);
+  --grid-3x: calc(var(--grid-unit) * 3);
+  --grid-4x: calc(var(--grid-unit) * 4);
+  
+  /* Premium Monospace Font Hierarchy */
+  --font-body: 'Berkeley Mono Variable', 'Berkeley Mono', ui-monospace, 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
+  --font-headers: 'Departure Mono', 'Berkeley Mono Variable', 'Berkeley Mono', ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-code: 'Terminus', 'Berkeley Mono', ui-monospace, 'SF Mono', Monaco, Consolas, monospace;
+  
+  /* Font Weights for Variable Font Support */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Berkeley Mono Variable Settings */
+  --font-variation-settings: 'wght' 400, 'slnt' 0;
+}
+
+.theme-light {
+  /* Light Mode - Paper Terminal */
+  --background-primary: var(--mono-white);
+  --background-primary-alt: #F8F8F8;
+  --background-secondary: #F0F0F0;
+  --background-modifier-border: var(--mono-gray-3);
+  
+  --text-normal: var(--mono-black);
+  --text-muted: var(--mono-gray-5);
+  --text-faint: var(--mono-gray-7);
+  
+  --interactive-accent: var(--terminal-accent-color, var(--terminal-green));
+  --interactive-accent-hover: var(--matrix-bright);
+  
+  --code-background: #F8F8F8;
+  --code-border: var(--mono-gray-3);
+}
+
+.theme-dark {
+  /* Dark Mode - Authentic Terminal */
+  --background-primary: var(--mono-black);
+  --background-primary-alt: var(--mono-gray-1);
+  --background-secondary: var(--mono-gray-1);
+  --background-modifier-border: var(--mono-gray-4);
+  
+  --text-normal: var(--terminal-green-bright);
+  --text-muted: var(--matrix-bright);
+  --text-faint: var(--matrix-light);
+  
+  --interactive-accent: var(--terminal-accent-color, var(--terminal-green-bright));
+  --interactive-accent-hover: var(--terminal-white);
+  
+  --code-background: var(--mono-gray-1);
+  --code-border: var(--mono-gray-4);
+}
+
+/* High Contrast Mode */
+.terminal-contrast-mode.theme-dark {
+  --background-primary: var(--mono-black);
+  --background-secondary: var(--mono-black);
+  --text-normal: var(--terminal-green-bright);
+  --text-muted: var(--terminal-green);
+  --background-modifier-border: var(--terminal-green);
+}
+
+/* MARKDOWN CONTENT ONLY - Terminal Authentic */
+
+/* Reading and Writing Areas - 100% Monospace */
+.markdown-preview-view,
+.markdown-source-view {
+  font-family: var(--font-body);
+  font-variation-settings: var(--font-variation-settings);
+  font-weight: var(--font-regular);
+  letter-spacing: 0;
+  padding: var(--grid-3x);
+  max-width: calc(var(--grid-unit) * 100);
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Headers - Departure Mono for Hierarchy */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-family: var(--font-headers);
+  font-weight: var(--font-bold);
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin-top: var(--grid-2x);
+  margin-bottom: var(--grid-unit);
+}
+
+/* H1 - Terminal System Header */
+.markdown-preview-view h1 {
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--interactive-accent);
+  padding-bottom: var(--grid-unit);
+  margin-bottom: var(--grid-2x);
+  margin-top: var(--grid-3x);
+  color: var(--interactive-accent);
+}
+
+/* H2 - Section Headers */
+.markdown-preview-view h2 {
+  font-size: 20px;
+  font-weight: var(--font-semibold);
+  margin-top: var(--grid-3x);
+  margin-bottom: var(--grid-unit);
+  color: var(--interactive-accent);
+}
+
+/* H3-H6 - Subsection Headers */
+.markdown-preview-view h3 {
+  font-size: 18px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-2x);
+  margin-bottom: var(--grid-half);
+}
+
+.markdown-preview-view h4 {
+  font-size: 16px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-2x);
+  margin-bottom: var(--grid-half);
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: 14px;
+  font-weight: var(--font-medium);
+  margin-top: var(--grid-unit);
+  margin-bottom: var(--grid-half);
+}
+
+/* Code Blocks - Terminus for Pixel Perfection */
+.markdown-preview-view pre,
+.markdown-preview-view code {
+  font-family: var(--font-code);
+  background: var(--code-background);
+  border: 1px solid var(--code-border);
+  border-radius: 0;
+}
+
+.markdown-preview-view pre {
+  padding: var(--grid-2x);
+  margin: var(--grid-unit) 0;
+  border-left: 3px solid var(--interactive-accent);
+  overflow-x: auto;
+}
+
+.markdown-preview-view code {
+  padding: 2px 4px;
+  font-size: 0.95em;
+  font-weight: var(--font-regular);
+}
+
+/* Tables - Terminal Grid Layout */
+.markdown-preview-view table {
+  border-collapse: collapse;
+  margin: var(--grid-2x) 0;
+  width: 100%;
+  font-family: var(--font-body);
+  border: 2px solid var(--interactive-accent);
+}
+
+.markdown-preview-view th {
+  background: var(--interactive-accent);
+  color: var(--background-primary);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  padding: var(--grid-unit) var(--grid-2x);
+  text-align: left;
+  font-family: var(--font-headers);
+}
+
+.markdown-preview-view td {
+  padding: var(--grid-unit) var(--grid-2x);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-right: 1px solid var(--background-modifier-border);
+  font-family: var(--font-body);
+}
+
+/* Blockquotes - Terminal System Messages */
+.markdown-preview-view blockquote {
+  border-left: 4px solid var(--interactive-accent);
+  background: var(--background-secondary);
+  margin: var(--grid-2x) 0;
+  padding: var(--grid-2x);
+  font-family: var(--font-body);
+  position: relative;
+}
+
+.markdown-preview-view blockquote::before {
+  content: "SYSTEM:";
+  position: absolute;
+  top: var(--grid-unit);
+  left: var(--grid-2x);
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  color: var(--interactive-accent);
+  letter-spacing: 0.1em;
+  font-family: var(--font-headers);
+}
+
+.markdown-preview-view blockquote p:first-child {
+  margin-top: var(--grid-unit);
+}
+
+/* Links - Terminal Hyperlinks */
+.markdown-preview-view a {
+  color: var(--interactive-accent);
+  text-decoration: none;
+  font-family: var(--font-body);
+  border-bottom: 1px dotted var(--interactive-accent);
+  transition: all 0.2s ease;
+}
+
+.markdown-preview-view a:hover {
+  background: var(--interactive-accent);
+  color: var(--background-primary);
+  border-bottom-style: solid;
+}
+
+/* Lists - Dense Terminal Style */
+.markdown-preview-view ul,
+.markdown-preview-view ol {
+  margin: var(--grid-unit) 0;
+  padding-left: var(--grid-3x);
+  font-family: var(--font-body);
+}
+
+.markdown-preview-view li {
+  margin-bottom: calc(var(--grid-unit) / 4);
+  line-height: 1.4;
+}
+
+.markdown-preview-view li p {
+  margin-top: 0;
+  margin-bottom: calc(var(--grid-unit) / 4);
+}
+
+/* Strong emphasis - Terminal Bold */
+.markdown-preview-view strong {
+  font-weight: var(--font-bold);
+  color: var(--interactive-accent);
+  font-family: var(--font-body);
+}
+
+/* Emphasis - Terminal Italic Simulation */
+.markdown-preview-view em {
+  font-style: normal;
+  color: var(--interactive-accent);
+  font-family: var(--font-body);
+}
+
+/* Horizontal Rules - Terminal Dividers */
+.markdown-preview-view hr {
+  border: none;
+  height: 1px;
+  background: var(--interactive-accent);
+  margin: var(--grid-3x) 0;
+  position: relative;
+}
+
+.markdown-preview-view hr::before {
+  content: "────────────────────────────────────────────────────────────────────────────────";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  color: var(--interactive-accent);
+  font-family: var(--font-code);
+  font-size: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Callouts - Terminal Alerts */
+.markdown-preview-view .callout {
+  border: 2px solid var(--interactive-accent);
+  margin: var(--grid-2x) 0;
+  padding: var(--grid-2x);
+  background: var(--background-secondary);
+  border-radius: 0;
+  font-family: var(--font-body);
+}
+
+.markdown-preview-view .callout-title {
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--interactive-accent);
+  margin-bottom: var(--grid-unit);
+  font-family: var(--font-headers);
+}
+
+/* Paragraph spacing - Terminal density */
+.markdown-preview-view p {
+  margin-top: 0;
+  margin-bottom: var(--grid-unit);
+  line-height: 1.5;
+}

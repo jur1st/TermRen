@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+    <head>
+        <meta name="dtb:uid" content="terminal-renaissance-audiobook"/>
+        <meta name="dtb:depth" content="1"/>
+        <meta name="dtb:totalPageCount" content="0"/>
+        <meta name="dtb:maxPageNumber" content="0"/>
+    </head>
+    
+    <docTitle>
+        <text>Terminal Renaissance: A Feynman Audiobook</text>
+    </docTitle>
+    
+    <navMap>
+        <navPoint id="title-page" playOrder="1">
+            <navLabel><text>Title Page</text></navLabel>
+            <content src="Text/title.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter1" playOrder="2">
+            <navLabel><text>Chapter 1: The Secret Grid</text></navLabel>
+            <content src="Text/chapter1.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter2" playOrder="3">
+            <navLabel><text>Chapter 2: The Basement Inventors</text></navLabel>
+            <content src="Text/chapter2.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter3" playOrder="4">
+            <navLabel><text>Chapter 3: When Simple Got Complicated</text></navLabel>
+            <content src="Text/chapter3.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter4" playOrder="5">
+            <navLabel><text>Chapter 4: Making Light Talk</text></navLabel>
+            <content src="Text/chapter4.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter5" playOrder="6">
+            <navLabel><text>Chapter 5: When Innovation Went to Sleep</text></navLabel>
+            <content src="Text/chapter5.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter6" playOrder="7">
+            <navLabel><text>Chapter 6: Waking Up the Old Magic</text></navLabel>
+            <content src="Text/chapter6.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter7" playOrder="8">
+            <navLabel><text>Chapter 7: Sixteen Colors, Infinite Beauty</text></navLabel>
+            <content src="Text/chapter7.xhtml"/>
+        </navPoint>
+        <navPoint id="chapter8" playOrder="9">
+            <navLabel><text>Chapter 8: The Renaissance Continues</text></navLabel>
+            <content src="Text/chapter8.xhtml"/>
+        </navPoint>
+    </navMap>
+</ncx>
